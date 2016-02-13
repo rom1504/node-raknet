@@ -42,9 +42,7 @@ function sizeOfIpAddress(value) {
 }
 
 function readTriad(buffer, offset) {
-  //return unpack("N", "\x00" . $str)[1];
-
-  // TODO
+  return unpack("N", "\x00" . buffer.toString('utf8'))[1];
 }
 
 function writeTriad(value, buffer, offset) {
@@ -52,9 +50,7 @@ function writeTriad(value, buffer, offset) {
 }
 
 function readLTriad(buffer, offset) {
-  // return unpack("V", $str . "\x00")[1];
-
-  // TODO
+  return unpack("V", buffer.toString('utf8') . "\x00")[1];
 }
 
 function writeLTriad(value, buffer, offset) {

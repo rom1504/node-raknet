@@ -4,7 +4,6 @@
   "description": "UDP network library that follows the RakNet protocol for Node.js",
   "main": "index.js",
   "scripts": {
-    "prepublish": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

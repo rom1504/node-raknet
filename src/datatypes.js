@@ -1,7 +1,7 @@
 module.exports={
   'magic': [readMagic, writeMagic, 16],
-  'ipAddress': [readIpAddress, writeIpAddress, sizeOfByteArray]
-  'triad': [readTriad, writeTriad, 3]
+  'ipAddress': [readIpAddress, writeIpAddress, sizeOfByteArray],
+  'triad': [readTriad, writeTriad, 3],
   'ltriad': [readLTriad, writeLTriad, 3]
 };
 

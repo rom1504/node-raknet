@@ -1,4 +1,4 @@
-node-raklib
+raknet
 ===========
 
 > Note: This project is not affiliated with Jenkins Software LLC nor RakNet.

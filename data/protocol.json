@@ -30,7 +30,7 @@
       {
         "name": "magic",
         "type": "magic"
-      }
+      },
       {
         "name": "serverName",
         "type": "string"
@@ -102,7 +102,7 @@
                 {
                   "name": "version",
                   "type": "byte"
-                },
+                }
               ]
             ]
           }
@@ -155,7 +155,7 @@
       {
         "name": "clientPort",
         "type": "short"
-      }
+      },
       {
         "name": "mtuSize",
         "type": "short"
@@ -163,7 +163,7 @@
       {
         "name": "serverSecurity",
         "type": "byte"
-      },
+      }
     ]
   },
   {
@@ -207,7 +207,7 @@
       {
         "name": "version",
         "type": "byte"
-      }
+      },
       {
         "name": "mtuSize",
         "type": "short"
@@ -284,7 +284,7 @@
                 {
                   "name": "version",
                   "type": "byte"
-                },
+                }
               ]
             ]
           }
@@ -313,7 +313,7 @@
       {
         "name": "magic",
         "type": "magic"
-      },
+      }
     ]
   },
   {
@@ -329,7 +329,7 @@
       {
         "name": "magic",
         "type": "magic"
-      },
+      }
     ]
   },
   {

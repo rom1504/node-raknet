@@ -1,0 +1,359 @@
+[
+  {
+    "packetName": "ACK",
+    "id": "0xc0",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": []
+  },
+  {
+    "packetName": "NACK",
+    "id": "0x0a",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": []
+  },
+  {
+    "packetName": "ADVERTISE_SYSTEM",
+    "id": "0x1d",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      },
+      {
+        "name": "serverID",
+        "type": "long"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      }
+      {
+        "name": "serverName",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "packetName": "CLIENT_CONNECT_DataPacket",
+    "id": "0x09",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "clientID",
+        "type": "long"
+      },
+      {
+        "name": "sendPing",
+        "type": "long"
+      },
+      {
+        "name": "useSecurity",
+        "type": "byte"
+      }
+    ]
+  },
+  {
+    "packetName": "CLIENT_DISCONNECT_DataPacket",
+    "id": "0x15",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": []
+  },
+  {
+    "packetName": "CLIENT_HANDSHAKE_DataPacket",
+    "id": "0x13",
+    "clientBound": false,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "address",
+        "type": "ipAddress"
+      },
+      {
+        "name": "port",
+        "type": "short"
+      },
+      {
+        "name": "version",
+        "type": "byte"
+      },
+      {
+        "name": "systemAddresses",
+        "type": [
+          "array",
+          {
+            "count": 10,
+            "type": [
+              "container",
+              [
+                {
+                  "name": "address",
+                  "type": "ipAddress"
+                },
+                {
+                  "name": "port",
+                  "type": "short"
+                },
+                {
+                  "name": "version",
+                  "type": "byte"
+                },
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "packetName": "OPEN_CONNECTION_REPLY_1",
+    "id": "0x06",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverID",
+        "type": "long"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "byte"
+      },
+      {
+        "name": "mtuSize",
+        "type": "short"
+      }
+    ]
+  },
+  {
+    "packetName": "OPEN_CONNECTION_REPLY_2",
+    "id": "0x08",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverID",
+        "type": "long"
+      },
+      {
+        "name": "clientAddress",
+        "type": "ipAddress"
+      },
+      {
+        "name": "clientPort",
+        "type": "short"
+      }
+      {
+        "name": "mtuSize",
+        "type": "short"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "byte"
+      },
+    ]
+  },
+  {
+    "packetName": "OPEN_CONNECTION_REQUEST_1",
+    "id": "0x05",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "mame": "protocol",
+        "type": "byte"
+      },
+      {
+        "name": "mtuSize",
+        "type": "restBuffer"
+      }
+    ]
+  },
+  {
+    "packetName": "OPEN_CONNECTION_REQUEST_2",
+    "id": "0x07",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverAddress",
+        "type": "ipAddress"
+      },
+      {
+        "name": "serverPort",
+        "type": "short"
+      },
+      {
+        "name": "version",
+        "type": "byte"
+      }
+      {
+        "name": "mtuSize",
+        "type": "short"
+      },
+      {
+        "name": "clientID",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "packetName": "PING_DataPacket",
+    "id": "0x00",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "packetName": "PONG_DataPacket",
+    "id": "0x03",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "packetName": "SERVER_HANDSHAKE_DataPacket",
+    "id": "0x10",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "address",
+        "type": "ipAddress"
+      },
+      {
+        "name": "port",
+        "type": "short"
+      },
+      {
+        "name": "version",
+        "type": "byte"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "byte"
+      },
+      {
+        "name": "systemAddresses",
+        "type": [
+          "array",
+          {
+            "count": 10,
+            "type": [
+              "container",
+              [
+                {
+                  "name": "address",
+                  "type": "ipAddress"
+                },
+                {
+                  "name": "port",
+                  "type": "short"
+                },
+                {
+                  "name": "version",
+                  "type": "byte"
+                },
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sendPing",
+        "type": "long"
+      },
+      {
+        "name": "sendPong",
+        "type": "long"
+      }
+    ]
+  },
+  {
+    "packetName": "UNCONNECTED_PING",
+    "id": "0x01",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+    ]
+  },
+  {
+    "packetName": "UNCONNECTED_PING_OPEN_CONNECTIONS",
+    "id": "0x02",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+    ]
+  },
+  {
+    "packetName": "UNCONNECTED_PONG",
+    "id": "0xc1",
+    "clientBound": true,
+    "serverBound": true,
+    "fields": [
+      {
+        "name": "pingID",
+        "type": "long"
+      },
+      {
+        "name": "serverID",
+        "type": "long"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverName",
+        "type": "string"
+      }
+    ]
+  }
+]

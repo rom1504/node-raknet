@@ -12,6 +12,10 @@
     "protocol"
   ],
   "author": "mhsjlw <mhsjlw@aol.com>",
+  "contributors": [{
+    "name": "rom1504",
+    "email": "romain.rom1@gmail.com"
+  }],
   "license": "MIT",
   "dependencies": {
     "protodef": "0.2.2",

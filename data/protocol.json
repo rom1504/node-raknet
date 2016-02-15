@@ -1,21 +1,16 @@
+
 {
-  "ACK": {
-    "id": "0xc0",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": []
-  },
-  "NACK": {
-    "id": "0x0a",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": []
-  },
-  "ADVERTISE_SYSTEM": {
-    "id": "0x1d",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  "packet_ACK": [
+    "container",
+    []
+  ],
+  "packet_NACK": [
+    "container",
+    []
+  ],
+  "packet_ADVERTISE_SYSTEM": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
@@ -33,12 +28,10 @@
         "type": "string"
       }
     ]
-  },
-  "CLIENT_CONNECT_DataPacket": {
-    "id": "0x09",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_CLIENT_CONNECT_DataPacket": [
+    "container",
+    [
       {
         "name": "clientID",
         "type": "long"
@@ -52,18 +45,14 @@
         "type": "byte"
       }
     ]
-  },
-  "CLIENT_DISCONNECT_DataPacket": {
-    "id": "0x15",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": []
-  },
-  "CLIENT_HANDSHAKE_DataPacket": {
-    "id": "0x13",
-    "clientBound": false,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_CLIENT_DISCONNECT_DataPacket": [
+    "container",
+    []
+  ],
+  "packet_CLIENT_HANDSHAKE_DataPacket": [
+    "container",
+    [
       {
         "name": "address",
         "type": "ipAddress"
@@ -103,12 +92,10 @@
         ]
       }
     ]
-  },
-  "OPEN_CONNECTION_REPLY_1": {
-    "id": "0x06",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_OPEN_CONNECTION_REPLY_1": [
+    "container",
+    [
       {
         "name": "magic",
         "type": "magic"
@@ -126,12 +113,10 @@
         "type": "short"
       }
     ]
-  },
-  "OPEN_CONNECTION_REPLY_2": {
-    "id": "0x08",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_OPEN_CONNECTION_REPLY_2": [
+    "container",
+    [
       {
         "name": "magic",
         "type": "magic"
@@ -157,12 +142,10 @@
         "type": "byte"
       }
     ]
-  },
-  "OPEN_CONNECTION_REQUEST_1": {
-    "id": "0x05",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_OPEN_CONNECTION_REQUEST_1": [
+    "container",
+    [
       {
         "name": "magic",
         "type": "magic"
@@ -176,12 +159,10 @@
         "type": "restBuffer"
       }
     ]
-  },
-  "OPEN_CONNECTION_REQUEST_2": {
-    "id": "0x07",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_OPEN_CONNECTION_REQUEST_2": [
+    "container",
+    [
       {
         "name": "magic",
         "type": "magic"
@@ -207,34 +188,28 @@
         "type": "long"
       }
     ]
-  },
-  "PING_DataPacket": {
-    "id": "0x00",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_PING_DataPacket": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
       }
     ]
-  },
-  "PONG_DataPacket": {
-    "id": "0x03",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_PONG_DataPacket": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
       }
     ]
-  },
-  "SERVER_HANDSHAKE_DataPacket": {
-    "id": "0x10",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_SERVER_HANDSHAKE_DataPacket": [
+    "container",
+    [
       {
         "name": "address",
         "type": "ipAddress"
@@ -286,12 +261,10 @@
         "type": "long"
       }
     ]
-  },
-  "UNCONNECTED_PING": {
-    "id": "0x01",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_UNCONNECTED_PING": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
@@ -301,12 +274,10 @@
         "type": "magic"
       }
     ]
-  },
-  "UNCONNECTED_PING_OPEN_CONNECTIONS": {
-    "id": "0x02",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_UNCONNECTED_PING_OPEN_CONNECTIONS": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
@@ -316,12 +287,10 @@
         "type": "magic"
       }
     ]
-  },
-  "UNCONNECTED_PONG": {
-    "id": "0xc1",
-    "clientBound": true,
-    "serverBound": true,
-    "fields": [
+  ],
+  "packet_UNCONNECTED_PONG": [
+    "container",
+    [
       {
         "name": "pingID",
         "type": "long"
@@ -339,5 +308,64 @@
         "type": "string"
       }
     ]
-  }
+  ],
+  "packet": [
+    "container",
+    [
+      {
+        "name": "name",
+        "type": [
+          "mapper",
+          {
+            "type": "ubyte",
+            "mappings": {
+              "0xc0": "ACK",
+              "0x0a": "NACK",
+              "0x1d": "ADVERTISE_SYSTEM",
+              "0x09": "CLIENT_CONNECT_DataPacket",
+              "0x15": "CLIENT_DISCONNECT_DataPacket",
+              "0x13": "CLIENT_HANDSHAKE_DataPacket",
+              "0x06": "OPEN_CONNECTION_REPLY_1",
+              "0x08": "OPEN_CONNECTION_REPLY_2",
+              "0x05": "OPEN_CONNECTION_REQUEST_1",
+              "0x07": "OPEN_CONNECTION_REQUEST_2",
+              "0x00": "PING_DataPacket",
+              "0x03": "PONG_DataPacket",
+              "0x10": "SERVER_HANDSHAKE_DataPacket",
+              "0x01": "UNCONNECTED_PING",
+              "0x02": "UNCONNECTED_PING_OPEN_CONNECTIONS",
+              "0xc1": "UNCONNECTED_PONG"
+            }
+          }
+        ]
+      },
+      {
+        "name": "params",
+        "type": [
+          "switch",
+          {
+            "compareTo": "name",
+            "fields": {
+              "ACK": "packet_ACK",
+              "NACK": "packet_NACK",
+              "ADVERTISE_SYSTEM": "packet_ADVERTISE_SYSTEM",
+              "CLIENT_CONNECT_DataPacket": "packet_CLIENT_CONNECT_DataPacket",
+              "CLIENT_DISCONNECT_DataPacket": "packet_CLIENT_DISCONNECT_DataPacket",
+              "CLIENT_HANDSHAKE_DataPacket": "packet_CLIENT_HANDSHAKE_DataPacket",
+              "OPEN_CONNECTION_REPLY_1": "packet_OPEN_CONNECTION_REPLY_1",
+              "OPEN_CONNECTION_REPLY_2": "packet_OPEN_CONNECTION_REPLY_2",
+              "OPEN_CONNECTION_REQUEST_1": "packet_OPEN_CONNECTION_REQUEST_1",
+              "OPEN_CONNECTION_REQUEST_2": "packet_OPEN_CONNECTION_REQUEST_2",
+              "PING_DataPacket": "packet_PING_DataPacket",
+              "PONG_DataPacket": "packet_PONG_DataPacket",
+              "SERVER_HANDSHAKE_DataPacket": "packet_SERVER_HANDSHAKE_DataPacket",
+              "UNCONNECTED_PING": "packet_UNCONNECTED_PING",
+              "UNCONNECTED_PING_OPEN_CONNECTIONS": "packet_UNCONNECTED_PING_OPEN_CONNECTIONS",
+              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG"
+            }
+          }
+        ]
+      }
+    ]
+  ]
 }

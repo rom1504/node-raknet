@@ -60,9 +60,26 @@ function readLTriad(buffer, offset) {
   }
 }
 
+function readRestBuffer(buffer, offset) {
+  return {
+    value: buffer.slice(offset),
+    size: buffer.length - offset
+  };
+}
+
+function writeRestBuffer(value, buffer, offset) {
+  value.copy(buffer, offset);
+  return offset + value.length;
+}
+
+function sizeOfRestBuffer(value) {
+  return value.length;
+}
+
 module.exports = {
   'magic': [readMagic, writeMagic, 16],
   'ipAddress': [readIpAddress, writeIpAddress, 4],
   'triad': [readTriad, writeTriad, 3],
-  'ltriad': [readLTriad, writeLTriad, 3]
+  'ltriad': [readLTriad, writeLTriad, 3],
+  'restBuffer': [readRestBuffer, writeRestBuffer, sizeOfRestBuffer],
 };

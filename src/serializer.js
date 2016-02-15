@@ -9,30 +9,9 @@ function createProtocol(packets) {
 
   proto.addTypes(require('./datatypes'));
   proto.addType("string",["pstring",{ countType:"short"}]);
-
-  Object.keys(packets).forEach(function (name) {
-    proto.addType("packet_" + name, ["container", packets[name].fields]);
-  });
-
-  proto.addType("packet", ["container", [{
-    "name": "name",
-    "type": ["mapper", {
-      "type": "ubyte",
-      "mappings": Object.keys(packets).reduce(function (acc, name) {
-        acc[parseInt(packets[name].id)] = name;
-        return acc;
-      }, {})
-    }]
-  }, {
-    "name": "params",
-    "type": ["switch", {
-      "compareTo": "name",
-      "fields": Object.keys(packets).reduce(function (acc, name) {
-        acc[name] = "packet_" + name;
-        return acc;
-      }, {})
-    }]
-  }]]);
+  
+  proto.addTypes(packets);
+  
   return proto;
 }
 

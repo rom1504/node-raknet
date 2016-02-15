@@ -1,20 +1,17 @@
-[
-  {
-    "packetName": "ACK",
+{
+  "ACK": {
     "id": "0xc0",
     "clientBound": true,
     "serverBound": true,
     "fields": []
   },
-  {
-    "packetName": "NACK",
+  "NACK": {
     "id": "0x0a",
     "clientBound": true,
     "serverBound": true,
     "fields": []
   },
-  {
-    "packetName": "ADVERTISE_SYSTEM",
+  "ADVERTISE_SYSTEM": {
     "id": "0x1d",
     "clientBound": true,
     "serverBound": true,
@@ -37,8 +34,7 @@
       }
     ]
   },
-  {
-    "packetName": "CLIENT_CONNECT_DataPacket",
+  "CLIENT_CONNECT_DataPacket": {
     "id": "0x09",
     "clientBound": true,
     "serverBound": true,
@@ -57,15 +53,13 @@
       }
     ]
   },
-  {
-    "packetName": "CLIENT_DISCONNECT_DataPacket",
+  "CLIENT_DISCONNECT_DataPacket": {
     "id": "0x15",
     "clientBound": true,
     "serverBound": true,
     "fields": []
   },
-  {
-    "packetName": "CLIENT_HANDSHAKE_DataPacket",
+  "CLIENT_HANDSHAKE_DataPacket": {
     "id": "0x13",
     "clientBound": false,
     "serverBound": true,
@@ -110,8 +104,7 @@
       }
     ]
   },
-  {
-    "packetName": "OPEN_CONNECTION_REPLY_1",
+  "OPEN_CONNECTION_REPLY_1": {
     "id": "0x06",
     "clientBound": true,
     "serverBound": true,
@@ -134,8 +127,7 @@
       }
     ]
   },
-  {
-    "packetName": "OPEN_CONNECTION_REPLY_2",
+  "OPEN_CONNECTION_REPLY_2": {
     "id": "0x08",
     "clientBound": true,
     "serverBound": true,
@@ -166,8 +158,7 @@
       }
     ]
   },
-  {
-    "packetName": "OPEN_CONNECTION_REQUEST_1",
+  "OPEN_CONNECTION_REQUEST_1": {
     "id": "0x05",
     "clientBound": true,
     "serverBound": true,
@@ -186,8 +177,7 @@
       }
     ]
   },
-  {
-    "packetName": "OPEN_CONNECTION_REQUEST_2",
+  "OPEN_CONNECTION_REQUEST_2": {
     "id": "0x07",
     "clientBound": true,
     "serverBound": true,
@@ -218,8 +208,7 @@
       }
     ]
   },
-  {
-    "packetName": "PING_DataPacket",
+  "PING_DataPacket": {
     "id": "0x00",
     "clientBound": true,
     "serverBound": true,
@@ -230,8 +219,7 @@
       }
     ]
   },
-  {
-    "packetName": "PONG_DataPacket",
+  "PONG_DataPacket": {
     "id": "0x03",
     "clientBound": true,
     "serverBound": true,
@@ -242,8 +230,7 @@
       }
     ]
   },
-  {
-    "packetName": "SERVER_HANDSHAKE_DataPacket",
+  "SERVER_HANDSHAKE_DataPacket": {
     "id": "0x10",
     "clientBound": true,
     "serverBound": true,
@@ -300,8 +287,7 @@
       }
     ]
   },
-  {
-    "packetName": "UNCONNECTED_PING",
+  "UNCONNECTED_PING": {
     "id": "0x01",
     "clientBound": true,
     "serverBound": true,
@@ -316,8 +302,7 @@
       }
     ]
   },
-  {
-    "packetName": "UNCONNECTED_PING_OPEN_CONNECTIONS",
+  "UNCONNECTED_PING_OPEN_CONNECTIONS": {
     "id": "0x02",
     "clientBound": true,
     "serverBound": true,
@@ -332,8 +317,7 @@
       }
     ]
   },
-  {
-    "packetName": "UNCONNECTED_PONG",
+  "UNCONNECTED_PONG": {
     "id": "0xc1",
     "clientBound": true,
     "serverBound": true,
@@ -356,4 +340,4 @@
       }
     ]
   }
-]
+}

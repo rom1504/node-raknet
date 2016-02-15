@@ -3,12 +3,11 @@ var Serializer = require('protodef').Serializer;
 var Parser = require('protodef').Parser;
 
 var protocol = require('../data/protocol.json');
-var datatypes = require("./datatypes.js");
 
 function createProtocol(packets) {
   var proto = new ProtoDef();
 
-  proto.addTypes(datatypes);
+  proto.addTypes(require('./datatypes'));
 
   Object.keys(packets).forEach(function (name) {
     proto.addType("packet_" + name, ["container", packets[name].fields]);

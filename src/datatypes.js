@@ -1,58 +1,68 @@
-module.exports={
-  'magic': [readMagic, writeMagic, 16],
-  'ipAddress': [readIpAddress, writeIpAddress, sizeOfIpAddress],
-  'triad': [readTriad, writeTriad, 3],
-  'ltriad': [readLTriad, writeLTriad, 3]
-};
-
 var tryCatch = require('protodef').utils.tryCatch;
 var addErrorField = require('protodef').utils.addErrorField;
-var pack = require('./utils/pack');
-var unpack = require('./utils/unpack');
-var substr = require('./utils/substr');
 
 function readMagic(buffer, offset) {
   return {
-    value: '\x00\xff\xff\x00\xfe\xfe\xfe\xfe\xfd\xfd\xfd\xfd\x12\x34\x56\x78',
-    size: 16 // i think?
-  };
+    value: [0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78],
+    size: 16
+  }
 }
 
 function writeMagic(value, buffer, offset) {
-  buffer.write('\x00\xff\xff\x00\xfe\xfe\xfe\xfe\xfd\xfd\xfd\xfd\x12\x34\x56\x78');
-  return offset + 16; // i think?
+  new Buffer([0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78]).copy(buffer,offset)
+  return offset + 16;
 }
 
 function readIpAddress(buffer, offset) {
-  // $addr = ((~$this->getByte()) & 0xff) .".". ((~$this->getByte()) & 0xff) .".". ((~$this->getByte()) & 0xff) .".". ((~$this->getByte()) & 0xff);
-
-  // TODO
+  var address = buffer[offset] + '.' + buffer[offset+1] + '.' + buffer[offset+2] + '.' + buffer[offset+3]
+  return {
+    size: 4,
+    value: address
+  }
 }
 
 function writeIpAddress(value, buffer, offset) {
-  // foreach(explode(".", $addr) as $b){
-  //   $this->putByte((~((int) $b)) & 0xff);
-  // }
+  var address = value.split('.');
 
-  // TODO
-}
+  address.forEach(function(b) {
+    buffer[offset] = parseInt(b);
+    offset++;
+  });
 
-function sizeOfIpAddress(value) {
-  return value.length; // i highly doubt this will work.
-}
-
-function readTriad(buffer, offset) {
-  return unpack("N", "\x00" . buffer.toString('utf8'))[1];
+  return offset;
 }
 
 function writeTriad(value, buffer, offset) {
-  return substr(pack("N", value), 1); // i think this works
+  buffer[offset] = (value >> 16) & 0xFF;
+  buffer[offset+1] = (value >> 8) & 0xFF; 
+  buffer[offset+2] = value & 0xFF;
+  return offset + 3;
 }
 
-function readLTriad(buffer, offset) {
-  return unpack("V", buffer.toString('utf8') . "\x00")[1];
+function readTriad(buffer, offset) {
+  return {
+    size: 3,
+    value: (buffer[offset] << 16) + (buffer[offset+1] << 8) + buffer[offset+2]
+  }
 }
 
 function writeLTriad(value, buffer, offset) {
-  return substr(pack("V", value), 0, -1); // i think this works
+  buffer[offset+2] = (value >> 16) & 0xFF;
+  buffer[offset+1] = (value >> 8) & 0xFF; 
+  buffer[offset] = value & 0xFF;
+  return offset + 3;
 }
+
+function readLTriad(buffer, offset) {
+  return {
+    size: 3,
+    value: (buffer[offset+2] << 16) + (buffer[offset+1] << 8) + buffer[offset]
+  }
+}
+
+module.exports = {
+  'magic': [readMagic, writeMagic, 16],
+  'ipAddress': [readIpAddress, writeIpAddress, 4],
+  'triad': [readTriad, writeTriad, 3],
+  'ltriad': [readLTriad, writeLTriad, 3]
+};

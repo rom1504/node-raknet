@@ -8,6 +8,7 @@ function createProtocol(packets) {
   var proto = new ProtoDef();
 
   proto.addTypes(require('./datatypes'));
+  proto.addType("string",["pstring",{ countType:"short"}]);
 
   Object.keys(packets).forEach(function (name) {
     proto.addType("packet_" + name, ["container", packets[name].fields]);

@@ -1,9 +1,15 @@
 var raknet = require('../index');
 
 raknet.serializer.write({
-  name: "NACK",
-  params: []
+  name: "ADVERTISE_SYSTEM",
+  params: {
+    pingID: 1,
+    serverID: 1,
+    magic: 0,
+    serverName: "Hello!"
+  }
 });
+
 raknet.serializer.pipe(raknet.parser)
 
 raknet.parser.on('data', function (chunk) {

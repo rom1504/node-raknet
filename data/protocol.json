@@ -168,7 +168,7 @@
         "type": "magic"
       },
       {
-        "mame": "protocol",
+        "name": "protocol",
         "type": "byte"
       },
       {

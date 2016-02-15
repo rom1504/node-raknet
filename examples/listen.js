@@ -1,1 +1,0 @@
-var raknet = require('../index');

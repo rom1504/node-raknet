@@ -318,22 +318,22 @@
           {
             "type": "ubyte",
             "mappings": {
-              "0": "PING_DataPacket",
+              "0": "PING",
               "1": "UNCONNECTED_PING",
               "2": "UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "3": "PONG_DataPacket",
+              "3": "PONG",
               "5": "OPEN_CONNECTION_REQUEST_1",
               "6": "OPEN_CONNECTION_REPLY_1",
               "7": "OPEN_CONNECTION_REQUEST_2",
               "8": "OPEN_CONNECTION_REPLY_2",
-              "9": "CLIENT_CONNECT_DataPacket",
+              "9": "CLIENT_CONNECT",
               "10": "NACK",
-              "16": "SERVER_HANDSHAKE_DataPacket",
-              "19": "CLIENT_HANDSHAKE_DataPacket",
-              "21": "CLIENT_DISCONNECT_DataPacket",
+              "16": "SERVER_HANDSHAKE",
+              "19": "CLIENT_HANDSHAKE",
+              "21": "CLIENT_DISCONNECT",
+              "28": "UNCONNECTED_PONG",
               "29": "ADVERTISE_SYSTEM",
-              "192": "ACK",
-              "193": "UNCONNECTED_PONG"
+              "192": "ACK"
             }
           }
         ]

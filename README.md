@@ -1,7 +1,7 @@
 raknet
 ===========
 
-[![NPM version](https://img.shields.io/npm/v/raknet.svg)](http://npmjs.com/package/minecraft-classic-protocol)
+[![NPM version](https://img.shields.io/npm/v/raknet.svg)](http://npmjs.com/package/raknet)
 [![Join the chat at https://gitter.im/PrismarineJS/node-minecraft-protocol](https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg)](https://gitter.im/PrismarineJS/node-minecraft-protocol)
 
 > Note: This project is not affiliated with Jenkins Software LLC nor RakNet.

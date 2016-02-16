@@ -7,6 +7,29 @@
     "container",
     []
   ],
+  "packet_DATA_PACKET": [
+    "container",
+    [
+      {
+        "name": "seqNumber",
+        "type": "ltriad"
+      },
+      {
+        "name": "encapsulatedPackets", 
+        "type": [
+          "array",
+          {
+            "countType": "short",
+            "type": "EncapsulatedPacket"
+          }
+        ]
+      }
+    ]
+  ],
+  "EncapsulatedPacket": [
+    "container",
+    []
+  ]
   "packet_ADVERTISE_SYSTEM": [
     "container",
     [
@@ -333,6 +356,22 @@
               "21": "CLIENT_DISCONNECT",
               "28": "UNCONNECTED_PONG",
               "29": "ADVERTISE_SYSTEM",
+              "128": "DATA_PACKET_0",
+              "129": "DATA_PACKET_1",
+              "130": "DATA_PACKET_2",
+              "131": "DATA_PACKET_3",
+              "132": "DATA_PACKET_4",
+              "133": "DATA_PACKET_5",
+              "134": "DATA_PACKET_6",
+              "135": "DATA_PACKET_7",
+              "136": "DATA_PACKET_8",
+              "137": "DATA_PACKET_9",
+              "138": "DATA_PACKET_A",
+              "139": "DATA_PACKET_B",
+              "140": "DATA_PACKET_C",
+              "141": "DATA_PACKET_D",
+              "142": "DATA_PACKET_E",
+              "143": "DATA_PACKET_F",
               "192": "ACK"
             }
           }
@@ -360,7 +399,23 @@
               "SERVER_HANDSHAKE": "packet_SERVER_HANDSHAKE",
               "UNCONNECTED_PING": "packet_UNCONNECTED_PING",
               "UNCONNECTED_PING_OPEN_CONNECTIONS": "packet_UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG"
+              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG",
+              "DATA_PACKET_0": "packet_DATA_PACKET",
+              "DATA_PACKET_1": "packet_DATA_PACKET",
+              "DATA_PACKET_2": "packet_DATA_PACKET",
+              "DATA_PACKET_3": "packet_DATA_PACKET",
+              "DATA_PACKET_4": "packet_DATA_PACKET",
+              "DATA_PACKET_5": "packet_DATA_PACKET",
+              "DATA_PACKET_6": "packet_DATA_PACKET",
+              "DATA_PACKET_7": "packet_DATA_PACKET",
+              "DATA_PACKET_8": "packet_DATA_PACKET",
+              "DATA_PACKET_9": "packet_DATA_PACKET",
+              "DATA_PACKET_A": "packet_DATA_PACKET",
+              "DATA_PACKET_B": "packet_DATA_PACKET",
+              "DATA_PACKET_C": "packet_DATA_PACKET",
+              "DATA_PACKET_D": "packet_DATA_PACKET",
+              "DATA_PACKET_E": "packet_DATA_PACKET",
+              "DATA_PACKET_F": "packet_DATA_PACKET"
             }
           }
         ]

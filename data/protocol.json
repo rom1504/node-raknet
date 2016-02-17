@@ -20,16 +20,17 @@
           "array",
           {
             "countType": "short",
-            "type": "EncapsulatedPacket"
+            "type": [
+              "EncapsulatedPacket",
+              {
+                "internal":false
+              }
+            ]
           }
         ]
       }
     ]
   ],
-  "EncapsulatedPacket": [
-    "container",
-    []
-  ]
   "packet_ADVERTISE_SYSTEM": [
     "container",
     [

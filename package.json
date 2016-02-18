@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "protodef": "0.2.2"
+    "protodef": "0.2.6"
   },
   "directories": {
     "example": "examples"

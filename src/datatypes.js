@@ -76,130 +76,6 @@ function sizeOfRestBuffer(value) {
   return value.length;
 }
 
-function readEncapsulatedPacket(buffer, offset, typeArgs) {
-  var packet = {};
-  var size=0;
-  var flags = buffer[offset];
-
-  packet.reliability = ((flags & 0xE0) >> 5);
-  packet.hasSplit = (flags & 0x10) > 0;
-  offset+=1;
-  size+=1;
-
-  var length;
-
-  if (typeArgs.internal) {
-    length = length = this.read(buffer, offset, "int").value;
-    offset+=4;
-    size+=4;
-    packet.identifierACK = this.read(buffer, offset, "int").value;
-    offset+=4;
-    size+=4;
-  } else {
-    length = Math.ceil((this.read(buffer, offset, "short").value) / 8);
-    offset+=3;
-    size+=3;
-    packet.identifierACK = null;
-  }
-
-  if (packet.reliability > 0) {
-    if (packet.reliability >= 2 && packet.reliability != 5) {
-        packet.messageIndex = this.read(buffer, offset, "ltriad").value;
-        offset+=3;
-        size+=3;
-      }
-
-      if (packet.reliability <= 4 && packet.reliability != 2) {
-        packet.orderIndex = this.read(buffer, offset, "ltriad").value;
-        offset+=3;
-        size+=3;
-        packet.orderChannel = buffer[offset];
-      }
-  }
-
-  if (packet.hasSplit) {
-    packet.splitCount = this.read(buffer, offset, "int").value;
-    offset+=4;
-    size+=4;
-    packet.splitID = this.read(buffer, offset, "short").value;
-    offset+=2;
-    size+=2;
-    packet.splitIndex = this.read(buffer, offset, "int").value;
-    offset+=4;
-    size+=4;
-  }
-
-  packet.buffer=buffer.slice(offset,length);
-  offset+=length;
-  size+=length;
-
-  return {
-    value: packet,
-    size: size
-  }
-}
-
-function writeEncapsulatedPacket(value, buffer, offset, typeArgs) {
-  offset=this.write((value.reliability << 5) | (value.hasSplit ? 0x10 : 0),buffer, offset, "byte");
-  
-  if (typeArgs.internal) {
-    offset=this.write(buffer.length, buffer, offset, "int");
-    offset=this.write((value.identifierACK == null ? 0 : value.identifierACK), buffer, offset, "int");
-  } else {
-    offset=this.write(buffer.length << 3, buffer, offset, "short");
-  }
-
-  if (value.reliability > 0) {
-    if (value.reliability >= 2 && value.reliability != 5) {
-      offset=this.write((value.messageIndex == null ? 0 : value.messageIndex), buffer, offset, "ltriad");
-    }
-    if (value.reliability <= 4 && value.reliability != 2) {
-      offset=this.write(value.orderIndex, buffer, offset, "ltriad");
-      offset=this.write(value.orderChannel & 0xff, buffer, offset, "byte");
-    }
-  }
-
-  if (value.hasSplit) {
-    offset=this.write(value.splitCount, buffer, offset, "int");
-    offset=this.write(value.splitID, buffer, offset, "short");
-    offset=this.write(value.splitIndex, buffer, offset, "int");
-  }
-
-  offset+=value.buffer.copy(buffer, offset);
-
-  return offset;
-}
-
-function sizeOfEncapsulatedPacket(value, typeArgs) {
-  var size=0;
-  size+=this.sizeOf((value.reliability << 5) | (value.hasSplit ? 0x10 : 0), "byte");
-  
-  if (typeArgs.internal) {
-    size+=this.sizeOf(value.buffer.length, "int");
-    size+=this.sizeOf((value.identifierACK == null ? 0 : value.identifierACK), "int");
-  } else {
-    size+=this.sizeOf(value.buffer.length << 3, "short");
-  }
-
-  if (value.reliability > 0) {
-    if (value.reliability >= 2 && value.reliability != 5) {
-      size+=this.sizeOf((value.messageIndex == null ? 0 : value.messageIndex), "ltriad");
-    }
-    if (value.reliability <= 4 && value.reliability != 2) {
-      size+=this.sizeOf(value.orderIndex, "ltriad");
-      size+=this.sizeOf(value.orderChannel & 0xff, "byte");
-    }
-  }
-
-  if (value.hasSplit) {
-    size+=this.sizeOf(value.splitCount, "int");
-    size+=this.sizeOf(value.splitID, "short");
-    size+=this.sizeOf(value.splitIndex, "int");
-  }
-
-  size+=value.buffer.length;
-  return size;
-}
 
 function readEndOfArray(buffer, offset, typeArgs) {
   var type=typeArgs.type;
@@ -227,11 +103,27 @@ function writeEndOfArray(value, buffer, offset,typeArgs) {
 
 function sizeOfEndOfArray(value, typeArgs) {
   var type=typeArgs.type;
-  var size = 1;
+  var size = 0;
   for(var i = 0; i < value.length; ++i) {
     size += this.sizeOf(value[i], type, {});
   }
   return size;
+}
+
+function readToByte(buffer,offset,typeArgs) {
+  var results = this.read(buffer, offset, typeArgs.type, {});
+  return {
+    value:Math.ceil(results.value/8),
+    size:results.size
+  };
+}
+
+function writeToByte(value, buffer,offset,typeArgs) {
+  return this.write(value<<3, buffer, offset, typeArgs.type, {});
+}
+
+function sizeOfToByte(value, typeArgs) {
+  return this.sizeOf(value<<3, typeArgs.type, {});
 }
 
 module.exports = {
@@ -240,6 +132,6 @@ module.exports = {
   'triad': [readTriad, writeTriad, 3],
   'ltriad': [readLTriad, writeLTriad, 3],
   'restBuffer': [readRestBuffer, writeRestBuffer, sizeOfRestBuffer],
-  'EncapsulatedPacket': [readEncapsulatedPacket, writeEncapsulatedPacket, sizeOfEncapsulatedPacket],
-  'endOfArray':[readEndOfArray,writeEndOfArray,sizeOfEndOfArray]
+  'endOfArray':[readEndOfArray,writeEndOfArray,sizeOfEndOfArray],
+  'toByte':[readToByte,writeToByte,sizeOfToByte]
 };

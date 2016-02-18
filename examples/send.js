@@ -15,20 +15,24 @@ var raknet = require('../index');
 raknet.serializer.write({
   name: "DATA_PACKET_0",
   params: {
-    seqNumber: 1234,
+    seqNumber: 12344,
     encapsulatedPackets: [{
-      buffer: new Buffer([0x01,0x02,0x03,0x04]),
-      reliability: 0,
-      hasSplit: 0,
+      reliability: 3,
+      hasSplit: 16,
+      length:4,
       identifierACK: 1,
       messageIndex: 1234,
       orderIndex: 1234,
-      orderChannel: 1234,
+      orderChannel: 10,
       splitCount: 1,
       splitID: 1,
-      splitIndex: 1
+      splitIndex: 1,
+      buffer: new Buffer([0x01,0x02,0x03,0x04])
     }]
   }
+});
+raknet.serializer.on('data', function(chunk) {
+  console.log(chunk);
 });
 
 raknet.serializer.pipe(raknet.parser)

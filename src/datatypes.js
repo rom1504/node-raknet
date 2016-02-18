@@ -78,15 +78,15 @@ function sizeOfRestBuffer(value) {
 
 function readEncapsulatedPacket(buffer, offset, typeArgs) {
   var packet = {};
-  var size;
+  var size=0;
   var flags = buffer[offset];
 
-  packet.reliability = ((flags & 0b11100000) >> 5);
-  packet.hasSplit = (flags & 0b00010000) > 0;
+  packet.reliability = ((flags & 0xE0) >> 5);
+  packet.hasSplit = (flags & 0x10) > 0;
   offset+=1;
   size+=1;
 
-  var length, offset;
+  var length;
 
   if (typeArgs.internal) {
     length = length = this.read(buffer, offset, "int").value;
@@ -120,7 +120,7 @@ function readEncapsulatedPacket(buffer, offset, typeArgs) {
   if (packet.hasSplit) {
     packet.splitCount = this.read(buffer, offset, "int").value;
     offset+=4;
-    size+=4
+    size+=4;
     packet.splitID = this.read(buffer, offset, "short").value;
     offset+=2;
     size+=2;
@@ -140,7 +140,7 @@ function readEncapsulatedPacket(buffer, offset, typeArgs) {
 }
 
 function writeEncapsulatedPacket(value, buffer, offset, typeArgs) {
-  offset=this.write((value.reliability << 5) | (value.hasSplit ? 0b00010000 : 0),buffer, offset, "byte");
+  offset=this.write((value.reliability << 5) | (value.hasSplit ? 0x10 : 0),buffer, offset, "byte");
   
   if (typeArgs.internal) {
     offset=this.write(buffer.length, buffer, offset, "int");
@@ -172,7 +172,7 @@ function writeEncapsulatedPacket(value, buffer, offset, typeArgs) {
 
 function sizeOfEncapsulatedPacket(value, typeArgs) {
   var size=0;
-  size+=this.sizeOf((value.reliability << 5) | (value.hasSplit ? 0b00010000 : 0), "byte");
+  size+=this.sizeOf((value.reliability << 5) | (value.hasSplit ? 0x10 : 0), "byte");
   
   if (typeArgs.internal) {
     size+=this.sizeOf(value.buffer.length, "int");
@@ -197,7 +197,7 @@ function sizeOfEncapsulatedPacket(value, typeArgs) {
     size+=this.sizeOf(value.splitIndex, "int");
   }
 
-  size+=value.buffer.length
+  size+=value.buffer.length;
   return size;
 }
 

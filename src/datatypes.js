@@ -9,12 +9,12 @@ function readMagic(buffer, offset) {
 }
 
 function writeMagic(value, buffer, offset) {
-  new Buffer([0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78]).copy(buffer,offset)
+  new Buffer([0x00, 0xff, 0xff, 0x00, 0xfe, 0xfe, 0xfe, 0xfe, 0xfd, 0xfd, 0xfd, 0xfd, 0x12, 0x34, 0x56, 0x78]).copy(buffer,offset);
   return offset + 16;
 }
 
 function readIpAddress(buffer, offset) {
-  var address = buffer[offset] + '.' + buffer[offset+1] + '.' + buffer[offset+2] + '.' + buffer[offset+3]
+  var address = buffer[offset] + '.' + buffer[offset+1] + '.' + buffer[offset+2] + '.' + buffer[offset+3];
   return {
     size: 4,
     value: address

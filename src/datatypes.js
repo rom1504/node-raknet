@@ -96,7 +96,7 @@ function readEncapsulatedPacket(buffer, offset, typeArgs) {
     offset+=4;
     size+=4;
   } else {
-    length = (int) Math.ceil(((double) this.read(buffer, offset, "short").value) / 8));
+    length = Math.ceil((this.read(buffer, offset, "short").value) / 8);
     offset+=3;
     size+=3;
     packet.identifierACK = null;
@@ -129,9 +129,9 @@ function readEncapsulatedPacket(buffer, offset, typeArgs) {
     size+=4;
   }
 
-  packet.buffer = buffer;
-  offset += length;
-  packet.offset = offset;
+  packet.buffer=buffer.slice(offset,length);
+  offset+=length;
+  size+=length;
 
   return {
     value: packet,
@@ -165,38 +165,39 @@ function writeEncapsulatedPacket(value, buffer, offset, typeArgs) {
     offset=this.write(value.splitIndex, buffer, offset, "int");
   }
 
-  offset=this.write(value.buffer, buffer, offset, "buffer");
+  offset+=value.buffer.copy(buffer, offset);
 
   return offset;
 }
 
 function sizeOfEncapsulatedPacket(value, typeArgs) {
   var size=0;
-  size+=this.sizeOf((value.reliability << 5) | (value.hasSplit ? 0b00010000 : 0),buffer, "byte");
+  size+=this.sizeOf((value.reliability << 5) | (value.hasSplit ? 0b00010000 : 0), "byte");
   
   if (typeArgs.internal) {
-    size+=this.sizeOf(buffer.length, buffer, "int");
-    size+=this.sizeOf((value.identifierACK == null ? 0 : value.identifierACK), buffer, "int");
+    size+=this.sizeOf(value.buffer.length, "int");
+    size+=this.sizeOf((value.identifierACK == null ? 0 : value.identifierACK), "int");
   } else {
-    size+=this.sizeOf(buffer.length << 3, buffer, "short");
+    size+=this.sizeOf(value.buffer.length << 3, "short");
   }
 
   if (value.reliability > 0) {
     if (value.reliability >= 2 && value.reliability != 5) {
-      size+=this.sizeOf((value.messageIndex == null ? 0 : value.messageIndex), buffer, "ltriad");
+      size+=this.sizeOf((value.messageIndex == null ? 0 : value.messageIndex), "ltriad");
     }
     if (value.reliability <= 4 && value.reliability != 2) {
-      size+=this.sizeOf(value.orderIndex, buffer, "ltriad");
-      size+=this.sizeOf(value.orderChannel & 0xff, buffer, "byte");
+      size+=this.sizeOf(value.orderIndex, "ltriad");
+      size+=this.sizeOf(value.orderChannel & 0xff, "byte");
     }
   }
 
   if (value.hasSplit) {
-    size+=this.sizeOf(value.splitCount, buffer, "int");
-    size+=this.sizeOf(value.splitID, buffer, "short");
-    size+=this.sizeOf(value.splitIndex, buffer, "int");
+    size+=this.sizeOf(value.splitCount, "int");
+    size+=this.sizeOf(value.splitID, "short");
+    size+=this.sizeOf(value.splitIndex, "int");
   }
 
+  size+=value.buffer.length
   return size;
 }
 

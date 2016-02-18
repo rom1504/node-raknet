@@ -11,12 +11,22 @@
     "protocol"
   ],
   "author": "mhsjlw <mhsjlw@aol.com>",
-  "contributors": [{
-    "name": "rom1504",
-    "email": "romain.rom1@gmail.com"
-  }],
+  "contributors": [
+    "rom1504 <romain.rom1@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "protodef": "0.2.2"
-  }
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhsjlw/node-raknet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mhsjlw/node-raknet/issues"
+  },
+  "homepage": "https://github.com/mhsjlw/node-raknet#readme"
 }

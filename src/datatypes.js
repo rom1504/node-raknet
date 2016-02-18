@@ -201,11 +201,45 @@ function sizeOfEncapsulatedPacket(value, typeArgs) {
   return size;
 }
 
+function readEndOfArray(buffer, offset, typeArgs) {
+  var type=typeArgs.type;
+  var cursor = offset;
+  var elements = [];
+  while(cursor<buffer.length) {
+    var results = this.read(buffer, cursor, type, {});
+    elements.push(results.value);
+    cursor += results.size;
+  }
+  return {
+    value: elements,
+    size: cursor - offset
+  };
+}
+
+function writeEndOfArray(value, buffer, offset,typeArgs) {
+  var type=typeArgs.type;
+  var self = this;
+  value.forEach(function(item) {
+    offset = self.write(item, buffer, offset, type, {});
+  });
+  return offset;
+}
+
+function sizeOfEndOfArray(value, typeArgs) {
+  var type=typeArgs.type;
+  var size = 1;
+  for(var i = 0; i < value.length; ++i) {
+    size += this.sizeOf(value[i], type, {});
+  }
+  return size;
+}
+
 module.exports = {
   'magic': [readMagic, writeMagic, 16],
   'ipAddress': [readIpAddress, writeIpAddress, 4],
   'triad': [readTriad, writeTriad, 3],
   'ltriad': [readLTriad, writeLTriad, 3],
   'restBuffer': [readRestBuffer, writeRestBuffer, sizeOfRestBuffer],
-  'EncapsulatedPacket': [readEncapsulatedPacket, writeEncapsulatedPacket, sizeOfEncapsulatedPacket]
+  'EncapsulatedPacket': [readEncapsulatedPacket, writeEncapsulatedPacket, sizeOfEncapsulatedPacket],
+  'endOfArray':[readEndOfArray,writeEndOfArray,sizeOfEndOfArray]
 };

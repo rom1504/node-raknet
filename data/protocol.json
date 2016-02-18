@@ -17,9 +17,8 @@
       {
         "name": "encapsulatedPackets", 
         "type": [
-          "array",
+          "endOfArray",
           {
-            "countType": "short",
             "type": [
               "EncapsulatedPacket",
               {

@@ -8,7 +8,7 @@ function createProtocol(packets) {
   var proto = new ProtoDef();
 
   proto.addTypes(require('./datatypes'));
-  proto.addType("string",["pstring",{ countType:"short"}]);
+  proto.addType("string",["pstring",{ countType:"i16"}]);
   
   proto.addTypes(packets);
   

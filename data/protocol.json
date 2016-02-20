@@ -56,8 +56,8 @@
             {
               "compareToValue":"$internal",
               "fields":{
-                "true":"int",
-                "false":["toByte",{"type":"short"}]
+                "true":"i32",
+                "false":["toByte",{"type":"i16"}]
               }
             }
           ]
@@ -69,7 +69,7 @@
           {
             "compareToValue":"$internal",
             "fields":{
-              "true":"int",
+              "true":"i32",
               "false":"void"
             }
           }
@@ -114,9 +114,9 @@
           {
             "compareTo":"reliability",
             "fields":{
-              "1":"byte",
-              "3":"byte",
-              "4":"byte"
+              "1":"i8",
+              "3":"i8",
+              "4":"i8"
             },
             "default":"void"
           }
@@ -129,7 +129,7 @@
           {
             "compareTo":"hasSplit",
             "fields":{
-              "16":"int",
+              "16":"i32",
               "0":"void"
             }
           }
@@ -142,7 +142,7 @@
           {
             "compareTo":"hasSplit",
             "fields":{
-              "16":"short",
+              "16":"i16",
               "0":"void"
             }
           }
@@ -155,7 +155,7 @@
           {
             "compareTo":"hasSplit",
             "fields":{
-              "16":"int",
+              "16":"i32",
               "0":"void"
             }
           }
@@ -174,11 +174,11 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "serverID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "magic",
@@ -195,15 +195,15 @@
     [
       {
         "name": "clientID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "sendPing",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "useSecurity",
-        "type": "byte"
+        "type": "i8"
       }
     ]
   ],
@@ -220,11 +220,11 @@
       },
       {
         "name": "port",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "version",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "systemAddresses",
@@ -241,11 +241,11 @@
                 },
                 {
                   "name": "port",
-                  "type": "short"
+                  "type": "i16"
                 },
                 {
                   "name": "version",
-                  "type": "byte"
+                  "type": "i8"
                 }
               ]
             ]
@@ -263,15 +263,15 @@
       },
       {
         "name": "serverID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "serverSecurity",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "mtuSize",
-        "type": "short"
+        "type": "i16"
       }
     ]
   ],
@@ -284,7 +284,7 @@
       },
       {
         "name": "serverID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "clientAddress",
@@ -292,15 +292,15 @@
       },
       {
         "name": "clientPort",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "mtuSize",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "serverSecurity",
-        "type": "byte"
+        "type": "i8"
       }
     ]
   ],
@@ -313,7 +313,7 @@
       },
       {
         "name": "protocol",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "mtuSize",
@@ -334,19 +334,19 @@
       },
       {
         "name": "serverPort",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "version",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "mtuSize",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "clientID",
-        "type": "long"
+        "type": "i64"
       }
     ]
   ],
@@ -355,7 +355,7 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       }
     ]
   ],
@@ -364,7 +364,7 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       }
     ]
   ],
@@ -377,15 +377,15 @@
       },
       {
         "name": "port",
-        "type": "short"
+        "type": "i16"
       },
       {
         "name": "version",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "serverSecurity",
-        "type": "byte"
+        "type": "i8"
       },
       {
         "name": "systemAddresses",
@@ -402,11 +402,11 @@
                 },
                 {
                   "name": "port",
-                  "type": "short"
+                  "type": "i16"
                 },
                 {
                   "name": "version",
-                  "type": "byte"
+                  "type": "i8"
                 }
               ]
             ]
@@ -415,11 +415,11 @@
       },
       {
         "name": "sendPing",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "sendPong",
-        "type": "long"
+        "type": "i64"
       }
     ]
   ],
@@ -428,7 +428,7 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "magic",
@@ -441,7 +441,7 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "magic",
@@ -454,11 +454,11 @@
     [
       {
         "name": "pingID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "serverID",
-        "type": "long"
+        "type": "i64"
       },
       {
         "name": "magic",
@@ -478,7 +478,7 @@
         "type": [
           "mapper",
           {
-            "type": "ubyte",
+            "type": "u8",
             "mappings": {
               "0": "PING",
               "1": "UNCONNECTED_PING",

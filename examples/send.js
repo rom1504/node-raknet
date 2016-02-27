@@ -1,5 +1,7 @@
-var parser = require('../index').createDeserializer;
-var serializer = require('../index').createSerializer;
+var raknet = require('../index');
+
+var parser = raknet.createDeserializer();
+var serializer = raknet.createSerializer();
 
 serializer.write({
   name: "ADVERTISE_SYSTEM",

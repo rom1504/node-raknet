@@ -18,7 +18,15 @@ function createProtocol(packets) {
 var proto = new createProtocol(protocol);
 proto.addTypes(protocol);
 
+function createSerializer() {
+  return new Serializer(proto, 'packet');
+}
+
+function createDeserializer() {
+  return new Parser(proto, 'packet');
+}
+
 module.exports = {
-  createDeserializer: new Parser(proto, 'packet'),
-  createSerializer: new Serializer(proto, 'packet')
+  createDeserializer: createDeserializer,
+  createSerializer: createSerializer
 }

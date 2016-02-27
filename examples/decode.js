@@ -1,4 +1,5 @@
-var parser = require('../index').createDeserializer;
+var raknet = require('../index');
+var parser = raknet.createDeserializer();
 
 console.log(
     JSON.stringify(

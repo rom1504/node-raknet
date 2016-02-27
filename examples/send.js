@@ -1,18 +1,17 @@
-var raknet = require('../index');
+var parser = require('../index').createDeserializer;
+var serializer = require('../index').createSerializer;
 
-// writing a 'normal' packet
-// raknet.serializer.write({
-//   name: "ADVERTISE_SYSTEM",
-//   params: {
-//     pingID: 1,
-//     serverID: 1,
-//     magic: 0,
-//     serverName: "Hello!"
-//   }
-// });
+serializer.write({
+  name: "ADVERTISE_SYSTEM",
+  params: {
+    pingID: 1,
+    serverID: 1,
+    magic: 0,
+    serverName: "Hello!"
+  }
+});
 
-// writing an encapsulatedpacket
-raknet.serializer.write({
+serializer.write({
   name: "DATA_PACKET_0",
   params: {
     seqNumber: 12344,
@@ -31,16 +30,13 @@ raknet.serializer.write({
     }]
   }
 });
-raknet.serializer.on('data', function(chunk) {
-  console.log(chunk);
-});
 
-raknet.serializer.pipe(raknet.parser)
+serializer.pipe(parser);
 
-raknet.parser.on('error', function(err) {
+parser.on('error', function(err) {
   console.log(err.stack);
 })
 
-raknet.parser.on('data', function(chunk) {
+parser.on('data', function(chunk) {
   console.log(JSON.stringify(chunk, null, 2));
 });

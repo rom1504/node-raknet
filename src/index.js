@@ -1,4 +1,4 @@
 module.exports = {
-  serializer: require('./serializer').serializer,
-  parser: require('./serializer').parser
+  createDeserializer: require('./serializer').createDeserializer,
+  createSerializer: require('./serializer').createSerializer
 }

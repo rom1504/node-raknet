@@ -17,10 +17,16 @@ function createProtocol(packets) {
 
 var proto = new createProtocol(protocol);
 proto.addTypes(protocol);
-var parser = new Parser(proto, 'packet');
-var serializer = new Serializer(proto, 'packet');
+
+function createSerializer() {
+  return new Serializer(proto, 'packet');
+}
+
+function createDeserializer() {
+  return new Parser(proto, 'packet');
+}
 
 module.exports = {
-  parser: parser,
-  serializer: serializer
+  createDeserializer: createDeserializer(),
+  createSerializer: createSerializer()
 }

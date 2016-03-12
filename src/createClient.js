@@ -14,31 +14,13 @@ Client.prototype.connect = function(port, host) {
   if(net.isIP(host) === 0) {
     dns.resolveSrv(host, function(err, addresses) {
       if(addresses && addresses.length > 0) {
-        var stream = udp({
-          address: '0.0.0.0', 
-          unicast: addresses[0].name,
-          port: addresses[0].port,
-          reuseAddr: true,
-        });
-        self.setSocket(stream);
+        self.setSocket(createStream(addresses[0].port, addresses[0].name));
       } else {
-        var stream = udp({
-          address: '0.0.0.0', 
-          unicast: host,
-          port: port,
-          reuseAddr: true, 
-        });
-        self.setSocket(stream);
+        self.setSocket(createStream(port, host));
       }
     });
   } else {
-    var stream = udp({
-      address: '0.0.0.0', 
-      unicast: host,
-      port: port,
-      reuseAddr: true, 
-    });
-    self.setSocket(stream);
+    self.setSocket(createStream(port, host));
   }
 };
 
@@ -58,4 +40,13 @@ function createClient(options) {
   }
 
   return client;
+}
+
+function createStream(port, host) {
+  return udp({
+    address: '127.0.1.1', 
+    unicast: host,
+    port: port,
+    reuseAddr: true, 
+  });
 }

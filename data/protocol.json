@@ -685,13 +685,13 @@
           {
             "type": "u8",
             "mappings": {
-              "0x01": "packet_encapsulated",
-              "0x02": "packet_open_session",
-              "0x03": "packet_close_session",
-              "0x04": "packet_invalid_session",
-              "0x06": "packet_ack_notification",
-              "0x07": "packet_set_option",
-              "0x08": "packet_raw",
+              "0x01": "encapsulated",
+              "0x02": "open_session",
+              "0x03": "close_session",
+              "0x04": "invalid_session",
+              "0x06": "ack_notification",
+              "0x07": "set_option",
+              "0x08": "raw",
             }
           }
         ]

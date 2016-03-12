@@ -79,7 +79,7 @@
       }
     ]
   ],
-  "packet_open_connection": [
+  "packet_open_session": [
     "container",
     [
       {

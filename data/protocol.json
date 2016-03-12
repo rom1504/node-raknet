@@ -5,6 +5,27 @@
       "countType":"i8"
     }
   ],
+  "packet_block_address": [
+    "container",
+    [
+      {
+        "name": "address",
+        "value": "bstring"
+      },
+      {
+        "name": "timeout",
+        "value": "i32"
+      }
+    ]
+  ],
+  "packet_shutdown": [
+    "container",
+    []
+  ],
+  "packet_emergency_shutdown": [
+    "container",
+    []
+  ],
   "packet_encapsulated": [
     "container",
     [
@@ -692,6 +713,9 @@
               "0x06": "ack_notification",
               "0x07": "set_option",
               "0x08": "raw",
+              "0x09": "block_address",
+              "0x7e": "shutdown",
+              "0x7f": "emergency_shutdown"
             }
           }
         ]
@@ -710,6 +734,9 @@
               "ack_notification": "packet_ack_notification",
               "set_option": "packet_set_option",
               "raw": "packet_raw",
+              "block_address": "packet_block_address",
+              "shutdown": "packet_shutdown",
+              "emergency_shutdown": "packet_emergency_shutdown"
             }
           }
         ]

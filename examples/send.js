@@ -4,7 +4,7 @@ var parser = raknet.createDeserializer();
 var serializer = raknet.createSerializer();
 
 serializer.write({
-  name: "ADVERTISE_SYSTEM",
+  name: "advertise_system",
   params: {
     pingID: 1,
     serverID: 1,
@@ -14,7 +14,7 @@ serializer.write({
 });
 
 serializer.write({
-  name: "DATA_PACKET_0",
+  name: "data_packet_0",
   params: {
     seqNumber: 12344,
     encapsulatedPackets: [{

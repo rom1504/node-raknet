@@ -1,8 +1,14 @@
 {
   "bstring": [
-    "string",
+    "pstring",
     {
       "countType":"i8"
+    }
+  ],
+  "string": [
+    "pstring",
+    { 
+      "countType": "i16"
     }
   ],
   "packet_block_address": [

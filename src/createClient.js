@@ -44,9 +44,10 @@ function createClient(options) {
 
 function createStream(port, host) {
   return udp({
-    address: '127.0.1.1', 
+    address: '0.0.0.0',
     unicast: host,
     port: port,
-    reuseAddr: true, 
+    reuseAddr: true,
+    bindingPort:port+1
   });
 }

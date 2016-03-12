@@ -3,8 +3,8 @@
 var EventEmitter = require('events').EventEmitter;
 var debug = require('./debug');
 
-var createSerializer = require("./transforms/serializer").createSerializer;
-var createDeserializer = require("./transforms/serializer").createDeserializer;
+var createSerializer = require("./transforms/special_serializer").createSerializer;
+var createDeserializer = require("./transforms/special_serializer").createDeserializer;
 
 class Client extends EventEmitter {
 

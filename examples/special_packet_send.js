@@ -7,7 +7,7 @@ serializer.write({
   name: "block_address",
   params: {
     address: "111.111.111.111",
-    timeout: 1000,
+    timeout: 1000
   }
 });
 

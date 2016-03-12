@@ -37,12 +37,7 @@
     [
       {
         "name": "identifier",
-        "type": [
-          "pstring",
-          {
-            "countType": "i8"
-          }
-        ]
+        "type": "bstring"
       },
       {
         "name": "flags",

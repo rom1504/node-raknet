@@ -2,26 +2,21 @@ var ProtoDef = require('protodef').ProtoDef;
 var Serializer = require('protodef').Serializer;
 var Parser = require('protodef').Parser;
 
-var protocol = require('../data/protocol.json');
-
-function createProtocol(packets) {
+function createProtocol() {
   var proto = new ProtoDef();
 
   proto.addTypes(require('./datatypes'));
-  proto.addTypes(packets);
+  proto.addTypes(require('../data/protocol.json'));
   
   return proto;
 }
 
-var proto = new createProtocol(protocol);
-proto.addTypes(protocol);
-
 function createSerializer() {
-  return new Serializer(proto, 'packet');
+  return new Serializer(createProtocol(), 'packet');
 }
 
 function createDeserializer() {
-  return new Parser(proto, 'packet');
+  return new Parser(createProtocol(), 'packet');
 }
 
 module.exports = {

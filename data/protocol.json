@@ -5,28 +5,28 @@
       "countType":"i8"
     }
   ],
-  "packet_encapsulated": [
-    "container",
-    [
-      {
-        "name": "identifier",
-        "type": [
-          "pstring",
-          {
-            "countType": "i8"
-          }
-        ]
-      },
-      {
-        "name": "flags",
-        "type": "i8"
-      },
-      {
-        "name": "buffer",
-        "type": "restBuffer"
-      }
-    ]
-  ],
+  "packet_encapsulated": [
+    "container",
+    [
+      {
+        "name": "identifier",
+        "type": [
+          "pstring",
+          {
+            "countType": "i8"
+          }
+        ]
+      },
+      {
+        "name": "flags",
+        "type": "i8"
+      },
+      {
+        "name": "buffer",
+        "type": "restBuffer"
+      }
+    ]
+  ],
   "packet_raw": [
     "container",
     [
@@ -113,582 +113,566 @@
       }
     ]
   ],
-  "packet_ACK": [
-    "container",
-    []
-  ],
-  "packet_NACK": [
-    "container",
-    []
-  ],
-  "packet_DATA_PACKET": [
-    "container",
-    [
-      {
-        "name": "seqNumber",
-        "type": "ltriad"
-      },
-      {
-        "name": "encapsulatedPackets",
-        "type": [
-          "endOfArray",
-          {
-            "type": [
-              "EncapsulatedPacket",
-              {
-                "internal": false
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  ],
-  "EncapsulatedPacket": [
-    "container",
-    [
-      {
-        "anon": true,
-        "type": [
-          "bitfield",
-          [
-            {
-              "name": "reliability",
-              "size": 3,
-              "signed": false
-            },
-            {
-              "name": "hasSplit",
-              "size": 5,
-              "signed": false
-            }
-          ]
-        ]
-      },
-      {
-        "name": "length",
-        "type": [
-          "count",
-          {
-            "countFor": "buffer",
-            "type": [
-              "switch",
-              {
-                "compareToValue": "$internal",
-                "fields": {
-                  "true": "i32",
-                  "false": [
-                    "toByte",
-                    {
-                      "type": "i16"
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "identifierACK",
-        "type": [
-          "switch",
-          {
-            "compareToValue": "$internal",
-            "fields": {
-              "true": "i32",
-              "false": "void"
-            }
-          }
-        ]
-      },
-      {
-        "name": "messageIndex",
-        "type": [
-          "switch",
-          {
-            "compareTo": "reliability",
-            "fields": {
-              "2": "ltriad",
-              "3": "ltriad",
-              "4": "ltriad",
-              "6": "ltriad",
-              "7": "ltriad"
-            },
-            "default": "void"
-          }
-        ]
-      },
-      {
-        "name": "orderIndex",
-        "type": [
-          "switch",
-          {
-            "compareTo": "reliability",
-            "fields": {
-              "1": "ltriad",
-              "3": "ltriad",
-              "4": "ltriad"
-            },
-            "default": "void"
-          }
-        ]
-      },
-      {
-        "name": "orderChannel",
-        "type": [
-          "switch",
-          {
-            "compareTo": "reliability",
-            "fields": {
-              "1": "i8",
-              "3": "i8",
-              "4": "i8"
-            },
-            "default": "void"
-          }
-        ]
-      },
-      {
-        "name": "splitCount",
-        "type": [
-          "switch",
-          {
-            "compareTo": "hasSplit",
-            "fields": {
-              "16": "i32",
-              "0": "void"
-            }
-          }
-        ]
-      },
-      {
-        "name": "splitID",
-        "type": [
-          "switch",
-          {
-            "compareTo": "hasSplit",
-            "fields": {
-              "16": "i16",
-              "0": "void"
-            }
-          }
-        ]
-      },
-      {
-        "name": "splitIndex",
-        "type": [
-          "switch",
-          {
-            "compareTo": "hasSplit",
-            "fields": {
-              "16": "i32",
-              "0": "void"
-            }
-          }
-        ]
-      },
-      {
-        "name": "buffer",
-        "type": [
-          "buffer",
-          {
-            "count": "length"
-          }
-        ]
-      }
-    ]
-  ],
-  "packet_ADVERTISE_SYSTEM": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      },
-      {
-        "name": "serverID",
-        "type": "i64"
-      },
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "serverName",
-        "type": "string"
-      }
-    ]
-  ],
-  "packet_CLIENT_CONNECT": [
-    "container",
-    [
-      {
-        "name": "clientID",
-        "type": "i64"
-      },
-      {
-        "name": "sendPing",
-        "type": "i64"
-      },
-      {
-        "name": "useSecurity",
-        "type": "i8"
-      }
-    ]
-  ],
-  "packet_CLIENT_DISCONNECT": [
-    "container",
-    []
-  ],
-  "packet_CLIENT_HANDSHAKE": [
-    "container",
-    [
-      {
-        "name": "address",
-        "type": "ipAddress"
-      },
-      {
-        "name": "port",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
-      },
-      {
-        "name": "systemAddresses",
-        "type": [
-          "array",
-          {
-            "count": 10,
-            "type": [
-              "container",
-              [
-                {
-                  "name": "address",
-                  "type": "ipAddress"
-                },
-                {
-                  "name": "port",
-                  "type": "i16"
-                },
-                {
-                  "name": "version",
-                  "type": "i8"
-                }
-              ]
-            ]
-          }
-        ]
-      }
-    ]
-  ],
-  "packet_OPEN_CONNECTION_REPLY_1": [
-    "container",
-    [
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "serverID",
-        "type": "i64"
-      },
-      {
-        "name": "serverSecurity",
-        "type": "i8"
-      },
-      {
-        "name": "mtuSize",
-        "type": "i16"
-      }
-    ]
-  ],
-  "packet_OPEN_CONNECTION_REPLY_2": [
-    "container",
-    [
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "serverID",
-        "type": "i64"
-      },
-      {
-        "name": "clientAddress",
-        "type": "ipAddress"
-      },
-      {
-        "name": "clientPort",
-        "type": "i16"
-      },
-      {
-        "name": "mtuSize",
-        "type": "i16"
-      },
-      {
-        "name": "serverSecurity",
-        "type": "i8"
-      }
-    ]
-  ],
-  "packet_OPEN_CONNECTION_REQUEST_1": [
-    "container",
-    [
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "protocol",
-        "type": "i8"
-      },
-      {
-        "name": "mtuSize",
-        "type": "restBuffer"
-      }
-    ]
-  ],
-  "packet_OPEN_CONNECTION_REQUEST_2": [
-    "container",
-    [
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "serverAddress",
-        "type": "ipAddress"
-      },
-      {
-        "name": "serverPort",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
-      },
-      {
-        "name": "mtuSize",
-        "type": "i16"
-      },
-      {
-        "name": "clientID",
-        "type": "i64"
-      }
-    ]
-  ],
-  "packet_PING": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      }
-    ]
-  ],
-  "packet_PONG": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      }
-    ]
-  ],
-  "packet_SERVER_HANDSHAKE": [
-    "container",
-    [
-      {
-        "name": "address",
-        "type": "ipAddress"
-      },
-      {
-        "name": "port",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
-      },
-      {
-        "name": "serverSecurity",
-        "type": "i8"
-      },
-      {
-        "name": "systemAddresses",
-        "type": [
-          "array",
-          {
-            "count": 10,
-            "type": [
-              "container",
-              [
-                {
-                  "name": "address",
-                  "type": "ipAddress"
-                },
-                {
-                  "name": "port",
-                  "type": "i16"
-                },
-                {
-                  "name": "version",
-                  "type": "i8"
-                }
-              ]
-            ]
-          }
-        ]
-      },
-      {
-        "name": "sendPing",
-        "type": "i64"
-      },
-      {
-        "name": "sendPong",
-        "type": "i64"
-      }
-    ]
-  ],
-  "packet_UNCONNECTED_PING": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      },
-      {
-        "name": "magic",
-        "type": "magic"
-      }
-    ]
-  ],
-  "packet_UNCONNECTED_PING_OPEN_CONNECTIONS": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      },
-      {
-        "name": "magic",
-        "type": "magic"
-      }
-    ]
-  ],
-  "packet_UNCONNECTED_PONG": [
-    "container",
-    [
-      {
-        "name": "pingID",
-        "type": "i64"
-      },
-      {
-        "name": "serverID",
-        "type": "i64"
-      },
-      {
-        "name": "magic",
-        "type": "magic"
-      },
-      {
-        "name": "serverName",
-        "type": "string"
-      }
-    ]
-  ],
-  "packet": [
-    "container",
-    [
-      {
-        "name": "name",
-        "type": [
-          "mapper",
-          {
-            "type": "u8",
-            "mappings": {
-              "0x00": "PING",
-              "0x01": "UNCONNECTED_PING",
-              "0x02": "UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "0x03": "PONG",
-              "0x05": "OPEN_CONNECTION_REQUEST_1",
-              "0x06": "OPEN_CONNECTION_REPLY_1",
-              "0x07": "OPEN_CONNECTION_REQUEST_2",
-              "0x08": "OPEN_CONNECTION_REPLY_2",
-              "0x09": "CLIENT_CONNECT",
-              "0x0a": "NACK",
-              "0x10": "SERVER_HANDSHAKE",
-              "0x13": "CLIENT_HANDSHAKE",
-              "0x15": "CLIENT_DISCONNECT",
-              "0x1c": "UNCONNECTED_PONG",
-              "0x1d": "ADVERTISE_SYSTEM",
-              "0x80": "DATA_PACKET_0",
-              "0x81": "DATA_PACKET_1",
-              "0x82": "DATA_PACKET_2",
-              "0x83": "DATA_PACKET_3",
-              "0x84": "DATA_PACKET_4",
-              "0x85": "DATA_PACKET_5",
-              "0x86": "DATA_PACKET_6",
-              "0x87": "DATA_PACKET_7",
-              "0x88": "DATA_PACKET_8",
-              "0x89": "DATA_PACKET_9",
-              "0x8a": "DATA_PACKET_A",
-              "0x8b": "DATA_PACKET_B",
-              "0x8c": "DATA_PACKET_C",
-              "0x8d": "DATA_PACKET_D",
-              "0x8e": "DATA_PACKET_E",
-              "0x8f": "DATA_PACKET_F",
-              "0xc0": "ACK"
-            }
-          }
-        ]
-      },
-      {
-        "name": "params",
-        "type": [
-          "switch",
-          {
-            "compareTo": "name",
-            "fields": {
-              "ACK": "packet_ACK",
-              "NACK": "packet_NACK",
-              "ADVERTISE_SYSTEM": "packet_ADVERTISE_SYSTEM",
-              "CLIENT_CONNECT": "packet_CLIENT_CONNECT",
-              "CLIENT_DISCONNECT": "packet_CLIENT_DISCONNECT",
-              "CLIENT_HANDSHAKE": "packet_CLIENT_HANDSHAKE",
-              "OPEN_CONNECTION_REPLY_1": "packet_OPEN_CONNECTION_REPLY_1",
-              "OPEN_CONNECTION_REPLY_2": "packet_OPEN_CONNECTION_REPLY_2",
-              "OPEN_CONNECTION_REQUEST_1": "packet_OPEN_CONNECTION_REQUEST_1",
-              "OPEN_CONNECTION_REQUEST_2": "packet_OPEN_CONNECTION_REQUEST_2",
-              "PING": "packet_PING",
-              "PONG": "packet_PONG",
-              "SERVER_HANDSHAKE": "packet_SERVER_HANDSHAKE",
-              "UNCONNECTED_PING": "packet_UNCONNECTED_PING",
-              "UNCONNECTED_PING_OPEN_CONNECTIONS": "packet_UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG",
-              "DATA_PACKET_0": "packet_DATA_PACKET",
-              "DATA_PACKET_1": "packet_DATA_PACKET",
-              "DATA_PACKET_2": "packet_DATA_PACKET",
-              "DATA_PACKET_3": "packet_DATA_PACKET",
-              "DATA_PACKET_4": "packet_DATA_PACKET",
-              "DATA_PACKET_5": "packet_DATA_PACKET",
-              "DATA_PACKET_6": "packet_DATA_PACKET",
-              "DATA_PACKET_7": "packet_DATA_PACKET",
-              "DATA_PACKET_8": "packet_DATA_PACKET",
-              "DATA_PACKET_9": "packet_DATA_PACKET",
-              "DATA_PACKET_A": "packet_DATA_PACKET",
-              "DATA_PACKET_B": "packet_DATA_PACKET",
-              "DATA_PACKET_C": "packet_DATA_PACKET",
-              "DATA_PACKET_D": "packet_DATA_PACKET",
-              "DATA_PACKET_E": "packet_DATA_PACKET",
-              "DATA_PACKET_F": "packet_DATA_PACKET"
-            }
-          }
-        ]
-      }
-    ]
-  ]
+  "packet_ACK": [
+    "container",
+    []
+  ],
+  "packet_NACK": [
+    "container",
+    []
+  ],
+  "packet_DATA_PACKET": [
+    "container",
+    [
+      {
+        "name": "seqNumber",
+        "type": "ltriad"
+      },
+      {
+        "name": "encapsulatedPackets", 
+        "type": [
+          "endOfArray",
+          {
+            "type": [
+              "EncapsulatedPacket",
+              {
+                "internal":false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  ],
+  "EncapsulatedPacket": [
+    "container",[
+      {
+        "anon":true,
+        "type":[
+          "bitfield",[
+            {
+              "name":"reliability",
+              "size":3,
+              "signed":false
+            },
+            {
+              "name":"hasSplit",
+              "size":5,
+              "signed":false
+            }
+          ]
+        ]
+      },
+      {
+        "name":"length",
+        "type":["count",
+          {"countFor":"buffer","type":["switch",
+            {
+              "compareToValue":"$internal",
+              "fields":{
+                "true":"i32",
+                "false":["toByte",{"type":"i16"}]
+              }
+            }
+          ]
+          }]
+      },
+      {
+        "name":"identifierACK",
+        "type":["switch",
+          {
+            "compareToValue":"$internal",
+            "fields":{
+              "true":"i32",
+              "false":"void"
+            }
+          }
+        ]
+      },
+      {
+        "name":"messageIndex",
+        "type":[
+          "switch",
+          {
+            "compareTo":"reliability",
+            "fields":{
+              "2":"ltriad",
+              "3":"ltriad",
+              "4":"ltriad",
+              "6":"ltriad",
+              "7":"ltriad"
+            },
+            "default":"void"
+          }
+        ]
+      },
+      {
+        "name":"orderIndex",
+        "type":[
+          "switch",
+          {
+            "compareTo":"reliability",
+            "fields":{
+              "1":"ltriad",
+              "3":"ltriad",
+              "4":"ltriad"
+            },
+            "default":"void"
+          }
+        ]
+      },
+      {
+        "name":"orderChannel",
+        "type":[
+          "switch",
+          {
+            "compareTo":"reliability",
+            "fields":{
+              "1":"i8",
+              "3":"i8",
+              "4":"i8"
+            },
+            "default":"void"
+          }
+        ]
+      },
+      {
+        "name":"splitCount",
+        "type":[
+          "switch",
+          {
+            "compareTo":"hasSplit",
+            "fields":{
+              "16":"i32",
+              "0":"void"
+            }
+          }
+        ]
+      },
+      {
+        "name":"splitID",
+        "type":[
+          "switch",
+          {
+            "compareTo":"hasSplit",
+            "fields":{
+              "16":"i16",
+              "0":"void"
+            }
+          }
+        ]
+      },
+      {
+        "name":"splitIndex",
+        "type":[
+          "switch",
+          {
+            "compareTo":"hasSplit",
+            "fields":{
+              "16":"i32",
+              "0":"void"
+            }
+          }
+        ]
+      },
+      {
+        "name":"buffer",
+        "type":["buffer",{
+          "count":"length"
+        }]
+      }
+    ]
+  ],
+  "packet_ADVERTISE_SYSTEM": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      },
+      {
+        "name": "serverID",
+        "type": "i64"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverName",
+        "type": "string"
+      }
+    ]
+  ],
+  "packet_CLIENT_CONNECT": [
+    "container",
+    [
+      {
+        "name": "clientID",
+        "type": "i64"
+      },
+      {
+        "name": "sendPing",
+        "type": "i64"
+      },
+      {
+        "name": "useSecurity",
+        "type": "i8"
+      }
+    ]
+  ],
+  "packet_CLIENT_DISCONNECT": [
+    "container",
+    []
+  ],
+  "packet_CLIENT_HANDSHAKE": [
+    "container",
+    [
+      {
+        "name": "address",
+        "type": "ipAddress"
+      },
+      {
+        "name": "port",
+        "type": "i16"
+      },
+      {
+        "name": "version",
+        "type": "i8"
+      },
+      {
+        "name": "systemAddresses",
+        "type": [
+          "array",
+          {
+            "count": 10,
+            "type": [
+              "container",
+              [
+                {
+                  "name": "address",
+                  "type": "ipAddress"
+                },
+                {
+                  "name": "port",
+                  "type": "i16"
+                },
+                {
+                  "name": "version",
+                  "type": "i8"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  ],
+  "packet_OPEN_CONNECTION_REPLY_1": [
+    "container",
+    [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverID",
+        "type": "i64"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "i8"
+      },
+      {
+        "name": "mtuSize",
+        "type": "i16"
+      }
+    ]
+  ],
+  "packet_OPEN_CONNECTION_REPLY_2": [
+    "container",
+    [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverID",
+        "type": "i64"
+      },
+      {
+        "name": "clientAddress",
+        "type": "ipAddress"
+      },
+      {
+        "name": "clientPort",
+        "type": "i16"
+      },
+      {
+        "name": "mtuSize",
+        "type": "i16"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "i8"
+      }
+    ]
+  ],
+  "packet_OPEN_CONNECTION_REQUEST_1": [
+    "container",
+    [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "protocol",
+        "type": "i8"
+      },
+      {
+        "name": "mtuSize",
+        "type": "restBuffer"
+      }
+    ]
+  ],
+  "packet_OPEN_CONNECTION_REQUEST_2": [
+    "container",
+    [
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverAddress",
+        "type": "ipAddress"
+      },
+      {
+        "name": "serverPort",
+        "type": "i16"
+      },
+      {
+        "name": "version",
+        "type": "i8"
+      },
+      {
+        "name": "mtuSize",
+        "type": "i16"
+      },
+      {
+        "name": "clientID",
+        "type": "i64"
+      }
+    ]
+  ],
+  "packet_PING": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      }
+    ]
+  ],
+  "packet_PONG": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      }
+    ]
+  ],
+  "packet_SERVER_HANDSHAKE": [
+    "container",
+    [
+      {
+        "name": "address",
+        "type": "ipAddress"
+      },
+      {
+        "name": "port",
+        "type": "i16"
+      },
+      {
+        "name": "version",
+        "type": "i8"
+      },
+      {
+        "name": "serverSecurity",
+        "type": "i8"
+      },
+      {
+        "name": "systemAddresses",
+        "type": [
+          "array",
+          {
+            "count": 10,
+            "type": [
+              "container",
+              [
+                {
+                  "name": "address",
+                  "type": "ipAddress"
+                },
+                {
+                  "name": "port",
+                  "type": "i16"
+                },
+                {
+                  "name": "version",
+                  "type": "i8"
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sendPing",
+        "type": "i64"
+      },
+      {
+        "name": "sendPong",
+        "type": "i64"
+      }
+    ]
+  ],
+  "packet_UNCONNECTED_PING": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      }
+    ]
+  ],
+  "packet_UNCONNECTED_PING_OPEN_CONNECTIONS": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      }
+    ]
+  ],
+  "packet_UNCONNECTED_PONG": [
+    "container",
+    [
+      {
+        "name": "pingID",
+        "type": "i64"
+      },
+      {
+        "name": "serverID",
+        "type": "i64"
+      },
+      {
+        "name": "magic",
+        "type": "magic"
+      },
+      {
+        "name": "serverName",
+        "type": "string"
+      }
+    ]
+  ],
+  "packet": [
+    "container",
+    [
+      {
+        "name": "name",
+        "type": [
+          "mapper",
+          {
+            "type": "u8",
+            "mappings": {
+              "0x00": "PING",
+              "0x01": "UNCONNECTED_PING",
+              "0x02": "UNCONNECTED_PING_OPEN_CONNECTIONS",
+              "0x03": "PONG",
+              "0x05": "OPEN_CONNECTION_REQUEST_1",
+              "0x06": "OPEN_CONNECTION_REPLY_1",
+              "0x07": "OPEN_CONNECTION_REQUEST_2",
+              "0x08": "OPEN_CONNECTION_REPLY_2",
+              "0x09": "CLIENT_CONNECT",
+              "0x0a": "NACK",
+              "0x10": "SERVER_HANDSHAKE",
+              "0x13": "CLIENT_HANDSHAKE",
+              "0x15": "CLIENT_DISCONNECT",
+              "0x1c": "UNCONNECTED_PONG",
+              "0x1d": "ADVERTISE_SYSTEM",
+              "0x80": "DATA_PACKET_0",
+              "0x81": "DATA_PACKET_1",
+              "0x82": "DATA_PACKET_2",
+              "0x83": "DATA_PACKET_3",
+              "0x84": "DATA_PACKET_4",
+              "0x85": "DATA_PACKET_5",
+              "0x86": "DATA_PACKET_6",
+              "0x87": "DATA_PACKET_7",
+              "0x88": "DATA_PACKET_8",
+              "0x89": "DATA_PACKET_9",
+              "0x8a": "DATA_PACKET_A",
+              "0x8b": "DATA_PACKET_B",
+              "0x8c": "DATA_PACKET_C",
+              "0x8d": "DATA_PACKET_D",
+              "0x8e": "DATA_PACKET_E",
+              "0x8f": "DATA_PACKET_F",
+              "0xc0": "ACK"
+            }
+          }
+        ]
+      },
+      {
+        "name": "params",
+        "type": [
+          "switch",
+          {
+            "compareTo": "name",
+            "fields": {
+              "ACK": "packet_ACK",
+              "NACK": "packet_NACK",
+              "ADVERTISE_SYSTEM": "packet_ADVERTISE_SYSTEM",
+              "CLIENT_CONNECT": "packet_CLIENT_CONNECT",
+              "CLIENT_DISCONNECT": "packet_CLIENT_DISCONNECT",
+              "CLIENT_HANDSHAKE": "packet_CLIENT_HANDSHAKE",
+              "OPEN_CONNECTION_REPLY_1": "packet_OPEN_CONNECTION_REPLY_1",
+              "OPEN_CONNECTION_REPLY_2": "packet_OPEN_CONNECTION_REPLY_2",
+              "OPEN_CONNECTION_REQUEST_1": "packet_OPEN_CONNECTION_REQUEST_1",
+              "OPEN_CONNECTION_REQUEST_2": "packet_OPEN_CONNECTION_REQUEST_2",
+              "PING": "packet_PING",
+              "PONG": "packet_PONG",
+              "SERVER_HANDSHAKE": "packet_SERVER_HANDSHAKE",
+              "UNCONNECTED_PING": "packet_UNCONNECTED_PING",
+              "UNCONNECTED_PING_OPEN_CONNECTIONS": "packet_UNCONNECTED_PING_OPEN_CONNECTIONS",
+              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG",
+              "DATA_PACKET_0": "packet_DATA_PACKET",
+              "DATA_PACKET_1": "packet_DATA_PACKET",
+              "DATA_PACKET_2": "packet_DATA_PACKET",
+              "DATA_PACKET_3": "packet_DATA_PACKET",
+              "DATA_PACKET_4": "packet_DATA_PACKET",
+              "DATA_PACKET_5": "packet_DATA_PACKET",
+              "DATA_PACKET_6": "packet_DATA_PACKET",
+              "DATA_PACKET_7": "packet_DATA_PACKET",
+              "DATA_PACKET_8": "packet_DATA_PACKET",
+              "DATA_PACKET_9": "packet_DATA_PACKET",
+              "DATA_PACKET_A": "packet_DATA_PACKET",
+              "DATA_PACKET_B": "packet_DATA_PACKET",
+              "DATA_PACKET_C": "packet_DATA_PACKET",
+              "DATA_PACKET_D": "packet_DATA_PACKET",
+              "DATA_PACKET_E": "packet_DATA_PACKET",
+              "DATA_PACKET_F": "packet_DATA_PACKET"
+            }
+          }
+        ]
+      }
+    ]
+  ]
 }

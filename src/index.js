@@ -1,6 +1,6 @@
 module.exports = {
-  createDeserializer: require('./serializer').createDeserializer,
-  createSerializer: require('./serializer').createSerializer,
-  createSpecialDeserializer: require('./special_packet_serializer').createDeserializer,
-  createSpecialSerializer: require('./special_packet_serializer').createSerializer
+  createDeserializer: require('./transforms/serializer').createDeserializer,
+  createSerializer: require('./transforms/serializer').createSerializer,
+  createSpecialDeserializer: require('./transforms/special_serializer').createDeserializer,
+  createSpecialSerializer: require('./transforms/special_serializer').createSerializer
 }

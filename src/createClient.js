@@ -11,31 +11,33 @@ module.exports = createClient;
 Client.prototype.connect = function(port, host) {
   var self = this;
 
-  if(port == 19132 && net.isIP(host) === 0) {
-
+  if(net.isIP(host) === 0) {
     dns.resolveSrv(host, function(err, addresses) {
-
       if(addresses && addresses.length > 0) {
-        //self.setSocket(net.connect(addresses[0].port, addresses[0].name));
         var stream = udp({
           address: '0.0.0.0', 
           unicast: addresses[0].name,
           port: addresses[0].port,
           reuseAddr: true,
         });
+        self.setSocket(stream);
       } else {
-        //self.setSocket(net.connect(port, host));
         var stream = udp({
           address: '0.0.0.0', 
           unicast: host,
           port: port,
           reuseAddr: true, 
         });
+        self.setSocket(stream);
       }
-
     });
   } else {
-
+    var stream = udp({
+      address: '0.0.0.0', 
+      unicast: host,
+      port: port,
+      reuseAddr: true, 
+    });
     self.setSocket(stream);
   }
 };

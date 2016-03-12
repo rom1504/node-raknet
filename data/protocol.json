@@ -113,15 +113,15 @@
       }
     ]
   ],
-  "packet_ACK": [
+  "packet_ack": [
     "container",
     []
   ],
-  "packet_NACK": [
+  "packet_nack": [
     "container",
     []
   ],
-  "packet_DATA_PACKET": [
+  "packet_data_packet": [
     "container",
     [
       {
@@ -283,7 +283,7 @@
       }
     ]
   ],
-  "packet_ADVERTISE_SYSTEM": [
+  "packet_advertise_system": [
     "container",
     [
       {
@@ -304,7 +304,7 @@
       }
     ]
   ],
-  "packet_CLIENT_CONNECT": [
+  "packet_client_connect": [
     "container",
     [
       {
@@ -321,11 +321,11 @@
       }
     ]
   ],
-  "packet_CLIENT_DISCONNECT": [
+  "packet_client_disconnect": [
     "container",
     []
   ],
-  "packet_CLIENT_HANDSHAKE": [
+  "packet_client_handshake": [
     "container",
     [
       {
@@ -368,7 +368,7 @@
       }
     ]
   ],
-  "packet_OPEN_CONNECTION_REPLY_1": [
+  "packet_open_connection_reply_1": [
     "container",
     [
       {
@@ -389,7 +389,7 @@
       }
     ]
   ],
-  "packet_OPEN_CONNECTION_REPLY_2": [
+  "packet_open_connection_reply_2": [
     "container",
     [
       {
@@ -418,7 +418,7 @@
       }
     ]
   ],
-  "packet_OPEN_CONNECTION_REQUEST_1": [
+  "packet_open_connection_request_1": [
     "container",
     [
       {
@@ -435,7 +435,7 @@
       }
     ]
   ],
-  "packet_OPEN_CONNECTION_REQUEST_2": [
+  "packet_open_connection_request_2": [
     "container",
     [
       {
@@ -464,7 +464,7 @@
       }
     ]
   ],
-  "packet_PING": [
+  "packet_ping": [
     "container",
     [
       {
@@ -473,7 +473,7 @@
       }
     ]
   ],
-  "packet_PONG": [
+  "packet_pong": [
     "container",
     [
       {
@@ -482,7 +482,7 @@
       }
     ]
   ],
-  "packet_SERVER_HANDSHAKE": [
+  "packet_server_handshake": [
     "container",
     [
       {
@@ -537,7 +537,7 @@
       }
     ]
   ],
-  "packet_UNCONNECTED_PING": [
+  "packet_unconnected_ping": [
     "container",
     [
       {
@@ -550,7 +550,7 @@
       }
     ]
   ],
-  "packet_UNCONNECTED_PING_OPEN_CONNECTIONS": [
+  "packet_unconnected_ping_open_connections": [
     "container",
     [
       {
@@ -563,7 +563,7 @@
       }
     ]
   ],
-  "packet_UNCONNECTED_PONG": [
+  "packet_unconnected_pong": [
     "container",
     [
       {
@@ -594,38 +594,38 @@
           {
             "type": "u8",
             "mappings": {
-              "0x00": "PING",
-              "0x01": "UNCONNECTED_PING",
-              "0x02": "UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "0x03": "PONG",
-              "0x05": "OPEN_CONNECTION_REQUEST_1",
-              "0x06": "OPEN_CONNECTION_REPLY_1",
-              "0x07": "OPEN_CONNECTION_REQUEST_2",
-              "0x08": "OPEN_CONNECTION_REPLY_2",
-              "0x09": "CLIENT_CONNECT",
-              "0x0a": "NACK",
-              "0x10": "SERVER_HANDSHAKE",
-              "0x13": "CLIENT_HANDSHAKE",
-              "0x15": "CLIENT_DISCONNECT",
-              "0x1c": "UNCONNECTED_PONG",
-              "0x1d": "ADVERTISE_SYSTEM",
-              "0x80": "DATA_PACKET_0",
-              "0x81": "DATA_PACKET_1",
-              "0x82": "DATA_PACKET_2",
-              "0x83": "DATA_PACKET_3",
-              "0x84": "DATA_PACKET_4",
-              "0x85": "DATA_PACKET_5",
-              "0x86": "DATA_PACKET_6",
-              "0x87": "DATA_PACKET_7",
-              "0x88": "DATA_PACKET_8",
-              "0x89": "DATA_PACKET_9",
-              "0x8a": "DATA_PACKET_A",
-              "0x8b": "DATA_PACKET_B",
-              "0x8c": "DATA_PACKET_C",
-              "0x8d": "DATA_PACKET_D",
-              "0x8e": "DATA_PACKET_E",
-              "0x8f": "DATA_PACKET_F",
-              "0xc0": "ACK"
+              "0x00": "ping",
+              "0x01": "unconnected_ping",
+              "0x02": "unconnected_ping_open_connections",
+              "0x03": "pong",
+              "0x05": "open_connection_request_1",
+              "0x06": "open_connection_reply_1",
+              "0x07": "open_connection_request_2",
+              "0x08": "open_connection_reply_2",
+              "0x09": "client_connect",
+              "0x0a": "nack",
+              "0x10": "server_handshake",
+              "0x13": "client_handshake",
+              "0x15": "client_disconnect",
+              "0x1c": "unconnected_pong",
+              "0x1d": "advertise_system",
+              "0x80": "data_packet_0",
+              "0x81": "data_packet_1",
+              "0x82": "data_packet_2",
+              "0x83": "data_packet_3",
+              "0x84": "data_packet_4",
+              "0x85": "data_packet_5",
+              "0x86": "data_packet_6",
+              "0x87": "data_packet_7",
+              "0x88": "data_packet_8",
+              "0x89": "data_packet_9",
+              "0x8a": "data_packet_A",
+              "0x8b": "data_packet_B",
+              "0x8c": "data_packet_C",
+              "0x8d": "data_packet_D",
+              "0x8e": "data_packet_E",
+              "0x8f": "data_packet_F",
+              "0xc0": "ack"
             }
           }
         ]
@@ -637,38 +637,79 @@
           {
             "compareTo": "name",
             "fields": {
-              "ACK": "packet_ACK",
-              "NACK": "packet_NACK",
-              "ADVERTISE_SYSTEM": "packet_ADVERTISE_SYSTEM",
-              "CLIENT_CONNECT": "packet_CLIENT_CONNECT",
-              "CLIENT_DISCONNECT": "packet_CLIENT_DISCONNECT",
-              "CLIENT_HANDSHAKE": "packet_CLIENT_HANDSHAKE",
-              "OPEN_CONNECTION_REPLY_1": "packet_OPEN_CONNECTION_REPLY_1",
-              "OPEN_CONNECTION_REPLY_2": "packet_OPEN_CONNECTION_REPLY_2",
-              "OPEN_CONNECTION_REQUEST_1": "packet_OPEN_CONNECTION_REQUEST_1",
-              "OPEN_CONNECTION_REQUEST_2": "packet_OPEN_CONNECTION_REQUEST_2",
-              "PING": "packet_PING",
-              "PONG": "packet_PONG",
-              "SERVER_HANDSHAKE": "packet_SERVER_HANDSHAKE",
-              "UNCONNECTED_PING": "packet_UNCONNECTED_PING",
-              "UNCONNECTED_PING_OPEN_CONNECTIONS": "packet_UNCONNECTED_PING_OPEN_CONNECTIONS",
-              "UNCONNECTED_PONG": "packet_UNCONNECTED_PONG",
-              "DATA_PACKET_0": "packet_DATA_PACKET",
-              "DATA_PACKET_1": "packet_DATA_PACKET",
-              "DATA_PACKET_2": "packet_DATA_PACKET",
-              "DATA_PACKET_3": "packet_DATA_PACKET",
-              "DATA_PACKET_4": "packet_DATA_PACKET",
-              "DATA_PACKET_5": "packet_DATA_PACKET",
-              "DATA_PACKET_6": "packet_DATA_PACKET",
-              "DATA_PACKET_7": "packet_DATA_PACKET",
-              "DATA_PACKET_8": "packet_DATA_PACKET",
-              "DATA_PACKET_9": "packet_DATA_PACKET",
-              "DATA_PACKET_A": "packet_DATA_PACKET",
-              "DATA_PACKET_B": "packet_DATA_PACKET",
-              "DATA_PACKET_C": "packet_DATA_PACKET",
-              "DATA_PACKET_D": "packet_DATA_PACKET",
-              "DATA_PACKET_E": "packet_DATA_PACKET",
-              "DATA_PACKET_F": "packet_DATA_PACKET"
+              "ack": "packet_ack",
+              "nack": "packet_nack",
+              "advertise_system": "packet_advertise_system",
+              "client_connect": "packet_client_connect",
+              "client_disconnect": "packet_client_disconnect",
+              "client_handshake": "packet_client_handshake",
+              "open_connection_reply_1": "packet_open_connection_reply_1",
+              "open_connection_reply_2": "packet_open_connection_reply_2",
+              "open_connection_request_1": "packet_open_connection_request_1",
+              "open_connection_request_2": "packet_open_connection_request_2",
+              "ping": "packet_ping",
+              "pong": "packet_pong",
+              "server_handshake": "packet_server_handshake",
+              "unconnected_ping": "packet_unconnected_ping",
+              "unconnected_ping_open_connections": "packet_unconnected_ping_open_connections",
+              "unconnected_pong": "packet_unconnected_pong",
+              "data_packet_0": "packet_data_packet",
+              "data_packet_1": "packet_data_packet",
+              "data_packet_2": "packet_data_packet",
+              "data_packet_3": "packet_data_packet",
+              "data_packet_4": "packet_data_packet",
+              "data_packet_5": "packet_data_packet",
+              "data_packet_6": "packet_data_packet",
+              "data_packet_7": "packet_data_packet",
+              "data_packet_8": "packet_data_packet",
+              "data_packet_9": "packet_data_packet",
+              "data_packet_A": "packet_data_packet",
+              "data_packet_B": "packet_data_packet",
+              "data_packet_C": "packet_data_packet",
+              "data_packet_D": "packet_data_packet",
+              "data_packet_E": "packet_data_packet",
+              "data_packet_F": "packet_data_packet"
+            }
+          }
+        ]
+      }
+    ]
+  ],
+  "special_packet": [
+    "container",
+    [
+      {
+        "name": "name",
+        "type": [
+          "mapper",
+          {
+            "type": "u8",
+            "mappings": {
+              "0x01": "packet_encapsulated",
+              "0x02": "packet_open_session",
+              "0x03": "packet_close_session",
+              "0x04": "packet_invalid_session",
+              "0x06": "packet_ack_notification",
+              "0x07": "packet_set_option",
+              "0x08": "packet_raw",
+            }
+          }
+        ]
+      },
+      {
+        "name": "params",
+        "type": [
+          "switch",
+          {
+            "compareTo": "name",
+            "fields": {
+              "encapsulated": "packet_encapsulated",
+              "open_session": "packet_open_session",
+              "close_session": "packet_close_session",
+              "invalid_session": "packet_invalid_session",
+              "ack_notification": "packet_ack_notification",
+              "set_option": "packet_set_option",
+              "raw": "packet_raw",
             }
           }
         ]

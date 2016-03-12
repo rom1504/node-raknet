@@ -1,3 +1,5 @@
+'use strict';
+
 var EventEmitter = require('events').EventEmitter;
 var debug = require('./debug');
 
@@ -5,15 +7,11 @@ var createSerializer = require("./transforms/serializer").createSerializer;
 var createDeserializer = require("./transforms/serializer").createDeserializer;
 
 class Client extends EventEmitter {
-  serializer;
-  deserializer;
-  isServer;
 
   constructor(isServer) {
     super();
     this.isServer = !!isServer;
   }
-
 
   setSerializer() {
     this.serializer = createSerializer(this.isServer);

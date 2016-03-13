@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "datagram-stream": "rom1504/node-datagram-stream#add_binding_port_option",
+    "datagram-stream": "^1.1.0",
     "protodef": "^1.1.2"
   },
   "directories": {

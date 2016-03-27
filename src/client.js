@@ -1,7 +1,7 @@
 'use strict';
 
 var EventEmitter = require('events').EventEmitter;
-var debug = require('./debug');
+var debug = require('debug')("raknet");
 
 var createSerializer = require("./transforms/special_serializer").createSerializer;
 var createDeserializer = require("./transforms/special_serializer").createDeserializer;

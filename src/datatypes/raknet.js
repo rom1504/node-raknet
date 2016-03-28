@@ -14,7 +14,7 @@ function writeMagic(value, buffer, offset) {
 }
 
 function readIpAddress(buffer, offset) {
-  var address = buffer[offset] + '.' + buffer[offset+1] + '.' + buffer[offset+2] + '.' + buffer[offset+3];
+  var address = (~buffer[offset]&0xff) + '.' + (~buffer[offset+1]&0xff) + '.' + (~buffer[offset+2]&0xff) + '.' + (~buffer[offset+3]&0xff);
   return {
     size: 4,
     value: address
@@ -25,7 +25,7 @@ function writeIpAddress(value, buffer, offset) {
   var address = value.split('.');
 
   address.forEach(function(b) {
-    buffer[offset] = parseInt(b);
+    buffer[offset] = ~(parseInt(b))&0xff;
     offset++;
   });
 

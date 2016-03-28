@@ -11,6 +11,23 @@
       "countType": "i16"
     }
   ],
+  "address_port": [
+    "container",
+    [
+      {
+        "name": "version",
+        "type": "i8"
+      },
+      {
+        "name": "address",
+        "type": "ipAddress"
+      },
+      {
+        "name": "port",
+        "type": "i16"
+      }
+    ]
+  ],
   "packet_block_address": [
     "container",
     [
@@ -352,15 +369,7 @@
     [
       {
         "name": "address",
-        "type": "ipAddress"
-      },
-      {
-        "name": "port",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
+        "type": "address_port"
       },
       {
         "name": "systemAddresses",
@@ -368,23 +377,7 @@
           "array",
           {
             "count": 10,
-            "type": [
-              "container",
-              [
-                {
-                  "name": "address",
-                  "type": "ipAddress"
-                },
-                {
-                  "name": "port",
-                  "type": "i16"
-                },
-                {
-                  "name": "version",
-                  "type": "i8"
-                }
-              ]
-            ]
+            "type": "address_port"
           }
         ]
       }
@@ -424,11 +417,7 @@
       },
       {
         "name": "clientAddress",
-        "type": "ipAddress"
-      },
-      {
-        "name": "clientPort",
-        "type": "i16"
+        "type": "address_port"
       },
       {
         "name": "mtuSize",
@@ -466,15 +455,7 @@
       },
       {
         "name": "serverAddress",
-        "type": "ipAddress"
-      },
-      {
-        "name": "serverPort",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
+        "type": "address_port"
       },
       {
         "name": "mtuSize",
@@ -509,15 +490,7 @@
     [
       {
         "name": "address",
-        "type": "ipAddress"
-      },
-      {
-        "name": "port",
-        "type": "i16"
-      },
-      {
-        "name": "version",
-        "type": "i8"
+        "type": "address_port"
       },
       {
         "name": "serverSecurity",
@@ -529,23 +502,7 @@
           "array",
           {
             "count": 10,
-            "type": [
-              "container",
-              [
-                {
-                  "name": "address",
-                  "type": "ipAddress"
-                },
-                {
-                  "name": "port",
-                  "type": "i16"
-                },
-                {
-                  "name": "version",
-                  "type": "i8"
-                }
-              ]
-            ]
+            "type": "address_port"
           }
         ]
       },

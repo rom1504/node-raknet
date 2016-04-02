@@ -8,7 +8,7 @@ var createDeserializer = require("./transforms/serializer").createDeserializer;
 
 class Client extends EventEmitter
 {
-  constructor(address,port)
+  constructor(port,address)
   {
     super();
     this.address=address;

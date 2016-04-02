@@ -25,7 +25,7 @@ class Server extends EventEmitter
       let client;
       if(!this.ipPortToClient[ipPort])
       {
-        client=new Client(rinfo.address,rinfo.port);
+        client=new Client(rinfo.port,rinfo.address);
         client.setSocket(this.socket);
         this.ipPortToClient[ipPort]=client;
         this.emit("connection",client);

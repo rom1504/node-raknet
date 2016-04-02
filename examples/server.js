@@ -9,4 +9,3 @@ var server = raknet.createServer({
   host: process.argv[2],
   port: parseInt(process.argv[3])
 });
-

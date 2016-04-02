@@ -29,6 +29,24 @@ function createServer(options) {
         clientAddress: { version: 4, address: client.address, port: client.port },
         mtuSize: 1492,
         serverSecurity: 0 }));
+
+    client.on("client_connect",packet => {
+      client.writeEncapsulated("server_handshake",{
+        clientAddress:{ version: 4, address: client.address, port: client.port },
+        serverSecurity:0,
+        systemAddresses:[
+          { version: 4, address: server.address, port: server.port }
+        ],
+        sendPing:[ 0, 73 ],
+        sendPong:[ 0, 73 ]
+      },0)
+    });
+
+    client.on("ping",packet => {
+      client.writeEncapsulated("pong",{
+        "pingID":packet.pingID
+      })
+    })
   });
 
   server.listen(port, host);

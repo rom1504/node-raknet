@@ -152,13 +152,46 @@
       }
     ]
   ],
-  "packet_ack": [
+  "packet_AcknowledgePacket": [
     "container",
-    []
-  ],
-  "packet_nack": [
-    "container",
-    []
+    [
+      {
+        "name":"packets",
+        "type":[ "array",{
+            "countType":"i16",
+            "type":["container",[
+                {
+                  "name":"one",
+                  "type":"i8"
+                },
+                {
+                  "name":"values",
+                  "type":["switch",
+                    {
+                      "compareTo":"one",
+                      "fields":{
+                        "0":["container",[
+                            {
+                              "name":"start",
+                              "type":"ltriad"
+                            },
+                            {
+                              "name":"end",
+                              "type":"ltriad"
+                            }
+                          ]
+                        ]
+                      },
+                      "default":"ltriad"
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    ]
   ],
   "packet_data_packet": [
     "container",
@@ -489,7 +522,7 @@
     "container",
     [
       {
-        "name": "address",
+        "name": "clientAddress",
         "type": "address_port"
       },
       {
@@ -582,7 +615,6 @@
               "0x07": "open_connection_request_2",
               "0x08": "open_connection_reply_2",
               "0x09": "client_connect",
-              "0x0a": "nack",
               "0x10": "server_handshake",
               "0x13": "client_handshake",
               "0x15": "client_disconnect",
@@ -604,6 +636,7 @@
               "0x8d": "data_packet_D",
               "0x8e": "data_packet_E",
               "0x8f": "data_packet_F",
+              "0xa0": "nack",
               "0xc0": "ack"
             }
           }
@@ -616,8 +649,8 @@
           {
             "compareTo": "name",
             "fields": {
-              "ack": "packet_ack",
-              "nack": "packet_nack",
+              "ack": "packet_AcknowledgePacket",
+              "nack": "packet_AcknowledgePacket",
               "advertise_system": "packet_advertise_system",
               "client_connect": "packet_client_connect",
               "client_disconnect": "packet_client_disconnect",

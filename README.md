@@ -8,8 +8,6 @@ raknet
 
 UDP network library that follows the RakNet protocol for Node.js
 
-> Note: `createClient` is currently broken, the current development focus is on the server. If this is of inconvenience to you, please create an issue, and we'll get on it
-
 ## Thanks
 - [RakLib](https://github.com/PocketMine/RakLib) for some packets to look at
 - [RakNet](http://www.jenkinssoftware.com/) for the original protocol

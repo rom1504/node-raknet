@@ -390,6 +390,10 @@
       {
         "name": "useSecurity",
         "type": "i8"
+      },
+      {
+        "name":"password",
+        "type":"restBuffer"
       }
     ]
   ],
@@ -401,7 +405,7 @@
     "container",
     [
       {
-        "name": "address",
+        "name": "serverAddress",
         "type": "address_port"
       },
       {

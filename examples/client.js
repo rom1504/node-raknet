@@ -8,6 +8,7 @@ if(process.argv.length < 3 || process.argv.length > 5) {
 var client = raknet.createClient({
   host: process.argv[2],
   port: parseInt(process.argv[3]),
+  password: "Rumpelstiltskin"
 });
 
 client.on('connect', function() {

@@ -74,8 +74,15 @@ class Client extends EventEmitter
       {
         var encapsulatedPackets=parsed.data.encapsulatedPackets;
         encapsulatedPackets.forEach((encapsulatedPacket) => {
-          var r=this.parser.parsePacketBuffer(encapsulatedPacket.buffer);
-          emitPacket(r);
+          try {
+            var r = this.parser.parsePacketBuffer(encapsulatedPacket.buffer);
+            emitPacket(r);
+          }
+          catch(err) {
+            console.log(err.stack);
+            debug("customPacket",encapsulatedPacket.buffer);
+            this.emit("customPacket",encapsulatedPacket.buffer);
+          }
         });
         this.write("ack",{"packets":[{"one":1,"values":parsed.data.seqNumber}]})
       }

@@ -12,6 +12,7 @@ function createClient(options) {
   assert.ok(options, "options is required");
   var port = options.port || 19132;
   var host = options.host || 'localhost';
+  var password = options.password;
 
   var client = new Client(options.port,options.host);
   var socket=dgram.createSocket({type: 'udp4'});
@@ -43,6 +44,24 @@ function createClient(options) {
         clientID:[ 339724, -6627870 ]
       });
     });
+
+    client.on('open_connection_reply_2',() => {
+      client.writeEncapsulated('client_connect',{
+        "clientID":[339844,-1917040252],
+        "sendPing":[0,43],
+        "useSecurity":0,
+        "password":new Buffer(options.password ? options.password : 0)
+      });
+    });
+
+    client.on('server_handshake',() => {
+      client.writeEncapsulated('client_handshake',{
+        serverAddress:{ version: 4, address: client.address, port: client.port },
+        systemAddresses:[
+          { version: 4, address: client.socket.address().address, port: /*client.socket.address().port*/12345/*TODO fix this*/ }
+        ]
+      });
+    })
   }
 
   return client;

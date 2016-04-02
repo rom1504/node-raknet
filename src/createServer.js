@@ -15,7 +15,20 @@ function createServer(options) {
   var server = new Server();
   
   server.on("connection", function (client) {
-    // not sure what to put here
+    client.on("open_connection_request_1",(packet) =>
+      client.write("open_connection_reply_1",{
+        magic:0,
+        serverID:[ 339724, -6627871 ],
+        serverSecurity:0,
+        mtuSize:1492
+      }));
+
+    client.on("open_connection_request_2",packet =>
+      client.write("open_connection_reply_2",{ magic: 0,
+        serverID: [ 339724, -6627871 ],
+        clientAddress: { version: 4, address: client.address, port: client.port },
+        mtuSize: 1492,
+        serverSecurity: 0 }));
   });
 
   server.listen(port, host);

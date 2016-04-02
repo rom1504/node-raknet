@@ -13,10 +13,3 @@ var client = raknet.createClient({
 client.on('connect', function() {
   console.info('connected');
 });
-
-client.write('open_session',{
-  identifier: "1457811379023796",
-  address: "127.0.0.1",
-  port: 12345,
-  clientID: 5
-});

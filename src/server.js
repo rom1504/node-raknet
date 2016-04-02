@@ -1,61 +1,39 @@
 'use strict';
 
-var net = require('net');
-var EventEmitter = require('events').EventEmitter;
-var Client = require('./client');
+const dgram=require("dgram");
+const EventEmitter = require('events').EventEmitter;
+const debug = require('debug')('raknet');
+const Client = require("./client");
 
-class Server extends EventEmitter {
-
-  constructor() {
+class Server extends EventEmitter
+{
+  constructor()
+  {
     super();
+    this.ipPortToClient={};
   }
 
-  listen(port, host) {
-    var self = this;
-    //var nextId = 0;
-    //self.socketServer = net.createServer();
-    // self.socketServer.on('connection', socket => {
-    //   var client = new Client(true);
-    //   client._end = client.end;
-    //   client.end = function end(endReason) {
-    //     client.write('disconnect_player', {
-    //       disconnect_reason: endReason
-    //     });
-    //     client._end(endReason);
-    //   };
-    //   client.id = nextId++;
-    //   self.clients[client.id] = client;
-    //   client.on('end', function () {
-    //     delete self.clients[client.id];
-    //   });
-    //   client.setSocket(socket);
-    //   self.emit('connection', client);
-    // });
+  listen(port,address)
+  {
+    this.address=address;
+    this.port=port;
+    this.socket=dgram.createSocket({type: 'udp4'});
+    this.socket.bind(this.port,this.address);
 
-    // self.socketServer.on('error', function (err) {
-    //   self.emit('error', err);
-    // });
-
-    // self.socketServer.on('close', function () {
-    //   self.emit('close');
-    // });
-
-    // self.socketServer.on('listening', function () {
-    //   self.emit('listening');
-    // });
-
-    // self.socketServer.listen(port, host);
-  }
-
-  close() {
-    var client;
-    for (var clientId in this.clients) {
-      if (!this.clients.hasOwnProperty(clientId)) continue;
-
-      client = this.clients[clientId];
-      client.end('ServerShutdown');
-    }
-    this.socketServer.close();
+    this.socket.on("message",(data,rinfo) => {
+      const ipPort=rinfo.address+":"+rinfo.port;
+      let client;
+      if(!this.ipPortToClient[ipPort])
+      {
+        client=new Client(rinfo.port,rinfo.address);
+        client.setSocket(this.socket);
+        this.ipPortToClient[ipPort]=client;
+        this.emit("connection",client);
+      }
+      else
+        client=this.ipPortToClient[ipPort];
+      client.handleMessage(data);
+    });
   }
 }
 

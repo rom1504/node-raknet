@@ -1,53 +1,49 @@
 'use strict';
 
-var udp = require('datagram-stream');
-var dns = require('dns');
-var net = require('net');
-var Client = require('./client');
-var assert = require('assert');
+const dgram=require("dgram");
+const dns = require('dns');
+const Client = require('./client');
+const assert = require('assert');
 
 module.exports = createClient;
 
-Client.prototype.connect = function(port, host) {
-  var self = this;
-
-  if(net.isIP(host) === 0) {
-    dns.resolveSrv(host, function(err, addresses) {
-      if(addresses && addresses.length > 0) {
-        self.setSocket(createStream(addresses[0].port, addresses[0].name));
-      } else {
-        self.setSocket(createStream(port, host));
-      }
-    });
-  } else {
-    self.setSocket(createStream(port, host));
-  }
-};
 
 function createClient(options) {
   assert.ok(options, "options is required");
   var port = options.port || 19132;
   var host = options.host || 'localhost';
 
-  var client = new Client();
+  var client = new Client(options.port,options.host);
+  var socket=dgram.createSocket({type: 'udp4'});
+  socket.bind();
+  socket.on("message",(data,rinfo) => {
+    client.handleMessage(data);
+  });
+  socket.on("listening",() => {
+    client.emit("connect");
+  });
 
-  client.on('connect', onConnect);
+  client.setSocket(socket);
+
+  client.on("connect",onConnect);
   client.username = options.username;
-  client.connect(port, host);
 
   function onConnect() {
-    // no idea what to put here
+    client.write('open_connection_request_1', {
+      magic:0,
+      protocol:6,
+      mtuSize:new Buffer(1446).fill(0)
+    });
+
+    client.on('open_connection_reply_1', function() {
+      client.write('open_connection_request_2', {
+        magic:0,
+        serverAddress:{ version: 4, address: client.address, port: client.port },
+        mtuSize:1426,
+        clientID:[ 339724, -6627870 ]
+      });
+    });
   }
 
   return client;
-}
-
-function createStream(port, host) {
-  return udp({
-    address: '0.0.0.0',
-    unicast: host,
-    port: port,
-    reuseAddr: true,
-    bindingPort:port+1
-  });
 }

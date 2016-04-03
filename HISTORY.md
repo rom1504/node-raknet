@@ -1,3 +1,7 @@
+## 1.3.1
+
+* add unknown field to unconnected_ping
+
 ## 1.3.0
 
 * full connection sequence for the client and the server

@@ -563,6 +563,10 @@
       {
         "name": "magic",
         "type": "magic"
+      },
+      {
+        "name":"unknown",
+        "type":"i64"
       }
     ]
   ],

@@ -8,6 +8,29 @@ raknet
 
 UDP network library that follows the RakNet protocol for Node.js
 
+## API
+
+### createClient(options)
+
+Create a client. options :
+* host
+* port
+* password (optional)
+
+### createServer(options)
+
+Create a server. options :
+* host
+* port
+
+### createSerializer()
+
+Return a raknet packet serializer, see node-protodef doc.
+
+### createDeserializer()
+
+Return a raknet packet serializer, see node-protodef doc.
+
 ## Thanks
 - [RakLib](https://github.com/PocketMine/RakLib) for some packets to look at
 - [RakNet](http://www.jenkinssoftware.com/) for the original protocol
